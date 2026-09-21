@@ -35,9 +35,11 @@ test('la API de recuerdos acepta el código correcto', async () => {
   const previous = process.env.MEMORY_ADMIN_CODE;
   const previousKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const previousUrl = process.env.VITE_SUPABASE_URL;
+  const previousFetch = globalThis.fetch;
   process.env.MEMORY_ADMIN_CODE = 'test-secret-long-enough';
   process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
   process.env.VITE_SUPABASE_URL = 'https://example.supabase.co';
+  globalThis.fetch = async () => new Response('[]', { status: 200, headers: { 'content-type': 'application/json' } });
   try {
     const res = response();
     await handler({ method: 'POST', headers: { 'x-memory-code': 'test-secret-long-enough' }, body: { action: 'verify' } }, res);
@@ -50,5 +52,6 @@ test('la API de recuerdos acepta el código correcto', async () => {
     else process.env.SUPABASE_SERVICE_ROLE_KEY = previousKey;
     if (previousUrl === undefined) delete process.env.VITE_SUPABASE_URL;
     else process.env.VITE_SUPABASE_URL = previousUrl;
+    globalThis.fetch = previousFetch;
   }
 });

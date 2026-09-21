@@ -481,3 +481,52 @@ a { color: inherit; }
   .memory-card figcaption { font-size: 12px; }
   .letter-section { padding-bottom: 80px; }
 }
+
+.album-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.album-choice { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 290px; padding: clamp(24px, 3vw, 39px); border: 1px solid var(--color-line); border-radius: 18px; background: linear-gradient(145deg, rgba(243,207,101,.07), rgba(255,255,255,.015)); color: var(--color-cream); cursor: pointer; text-align: left; transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+.album-choice:hover { transform: translateY(-6px); border-color: var(--color-gold); background: linear-gradient(145deg, rgba(243,207,101,.13), rgba(255,255,255,.025)); }
+.album-choice__icon { display: grid; place-items: center; width: 70px; height: 70px; margin-bottom: auto; border: 1px solid var(--color-line); border-radius: 16px; color: var(--color-gold); }
+.album-choice__icon svg { width: 41px; height: 41px; }
+.album-choice__copy { display: flex; flex-direction: column; gap: 8px; }
+.album-choice__copy strong { font-family: var(--font-display); font-size: clamp(34px, 4vw, 52px); font-weight: 400; letter-spacing: -.04em; }
+.album-choice__copy small { color: var(--color-muted); font-size: 13px; line-height: 1.5; }
+.album-choice__count { position: absolute; top: 35px; right: 38px; color: var(--color-gold); font-family: var(--font-display); font-size: 24px; }
+.album-choice__arrow { position: absolute; right: 37px; bottom: 37px; color: var(--color-gold); font-size: 24px; }
+.album-view__top { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 20px; }
+.album-back { padding: 10px 0; border: 0; background: transparent; color: var(--color-gold); cursor: pointer; font-size: 13px; }
+.album-back:hover { text-decoration: underline; }
+.album-view h3 { margin: 0 0 30px; font-family: var(--font-display); font-size: clamp(35px, 4vw, 50px); font-weight: 400; letter-spacing: -.04em; }
+.memory-card > button:first-child { display: block; width: 100%; }
+.memory-card__view svg { display: block; width: 18px; height: 18px; }
+.memory-card .memory-card__edit { display: inline-block; width: auto; min-height: 34px; margin-top: 5px; padding: 4px 0; overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; color: var(--color-gold); cursor: pointer; font-size: 11px; text-align: left; text-decoration: underline; text-underline-offset: 3px; }
+.memory-manager__selected { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; color: var(--color-muted); font-size: 13px; }
+.memory-manager__selected img, .memory-manager__selected video { width: 85px; height: 100px; border-radius: 8px; object-fit: cover; }
+.memory-manager__stage { display: flex; align-items: center; gap: 10px; margin: 4px 0; color: var(--color-gold) !important; }
+.memory-manager__spinner { display: inline-block; width: 15px; height: 15px; border: 2px solid rgba(243,207,101,.25); border-top-color: var(--color-gold); border-radius: 50%; animation: memory-spin .7s linear infinite; }
+@keyframes memory-spin { to { transform: rotate(360deg); } }
+.letter-dialog { overflow-y: auto; overscroll-behavior: contain; }
+.letter-paper__signature strong { color: #9c4646; }
+.plans-section { padding: 100px 0 40px; border-top: 1px solid var(--color-line); }
+.plans-section h2 { max-width: 680px; margin: 14px 0; font-family: var(--font-display); font-size: clamp(44px, 5vw, 68px); font-weight: 400; letter-spacing: -.055em; line-height: 1.05; }
+.plans-section h2 em { color: var(--color-gold); font-weight: 400; }
+.plans-section__intro { margin: 0 0 34px; color: var(--color-muted); font-size: 15px; }
+.plans-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+.plan-card { display: flex; flex-direction: column; min-height: 250px; padding: 28px; border: 1px solid var(--color-line); border-radius: 13px; background: rgba(243,207,101,.04); }
+.plan-card__number { display: flex; justify-content: space-between; color: var(--color-gold); font-size: 11px; letter-spacing: .2em; }
+.plan-card__number span { font-size: 22px; }
+.plan-card h3 { margin: 33px 0 9px; font-family: var(--font-display); font-size: 28px; font-weight: 400; }
+.plan-card p { margin: 0; color: var(--color-muted); font-size: 13px; line-height: 1.6; }
+.plan-card__status { margin-top: auto; padding-top: 24px; color: var(--color-gold); font-size: 11px; letter-spacing: .08em; }
+.plans-section__ending { margin: 65px 0 0; color: var(--color-gold); font-family: var(--font-display); font-size: 20px; font-style: italic; text-align: center; }
+@media (max-width: 760px) {
+  .album-choices { grid-template-columns: 1fr; gap: 14px; }
+  .album-choice { min-height: 210px; }
+  .album-choice__icon { width: 54px; height: 54px; }
+  .album-choice__icon svg { width: 34px; height: 34px; }
+  .album-choice__count { top: 25px; right: 26px; }
+  .album-choice__arrow { right: 28px; bottom: 28px; }
+  .album-view__top { flex-wrap: wrap; }
+  .plans-grid { grid-template-columns: 1fr; }
+  .plan-card { min-height: 205px; }
+  .plans-section { padding-top: 75px; }
+}

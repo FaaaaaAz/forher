@@ -7,6 +7,7 @@ import IntroSection from './sections/IntroSection.jsx';
 import GardenSection from './sections/GardenSection.jsx';
 import MemoriesSection from './sections/MemoriesSection.jsx';
 import LetterSection from './sections/LetterSection.jsx';
+import PlansSection from './sections/PlansSection.jsx';
 import { getBoliviaDate } from './utils/dates.js';
 import { getSeason } from './utils/season.js';
 
@@ -42,6 +43,7 @@ export default function App() {
                 <GardenSection />
                 <MemoriesSection />
                 <LetterSection />
+                <PlansSection />
               </div>
             </motion.main>
           ) : (

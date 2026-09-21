@@ -37,8 +37,13 @@ export default async function handler(req, res) {
 
   try {
     const { action } = req.body ?? {};
-    if (action === 'verify') return res.status(200).json({ ok: true });
     const supabase = client();
+
+    if (action === 'verify') {
+      const { error } = await supabase.from('memories').select('id').limit(1);
+      if (error) throw error;
+      return res.status(200).json({ ok: true });
+    }
 
     if (action === 'upload-url') {
       const extension = allowedExtensions.get(req.body?.contentType);
@@ -92,6 +97,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Acción no válida.' });
   } catch (error) {
     console.error('Memory API error:', error);
-    return res.status(500).json({ error: 'No se pudo guardar el recuerdo. Revisa la configuración de Vercel y Supabase.' });
+    return res.status(500).json({ error: `No se pudo guardar el recuerdo: ${String(error?.message || 'error desconocido').slice(0, 180)}` });
   }
 }

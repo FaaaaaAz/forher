@@ -102,7 +102,7 @@ Vercel despliega nuevos cambios al recibir pushes en la rama de producción. [Ve
 
 ## Añadir y editar recuerdos desde la web
 
-La sección **Fotos / Videos** deja ver todos los recuerdos. **Añadir o editar** pide un código compartido una vez por dispositivo. Quien tenga ese código puede subir fotos y videos y cambiar descripciones; no hay correo ni cuenta. No compartas el código con visitantes. La página pública puede mostrar los archivos del bucket mediante sus URL.
+La sección de recuerdos muestra dos entradas, **Fotos** y **Videos**. Dentro de cada álbum, **Añadir recuerdo** pide un código compartido una vez por dispositivo. Cada foto o video tiene su propio botón **Editar descripción**. Quien tenga el código puede subir archivos y cambiar descripciones; no hay correo ni cuenta. No compartas el código con visitantes. La página pública puede mostrar los archivos del bucket mediante sus URL.
 
 Para activar la escritura en Vercel, abre **Project → Settings → Environment Variables** y agrega estas variables para **Production**:
 
@@ -111,4 +111,4 @@ Para activar la escritura en Vercel, abre **Project → Settings → Environment
 
 Después haz **Redeploy**. El valor de `VITE_SUPABASE_URL` ya configurado también debe estar disponible para la función del servidor. Puedes cambiar el código en Vercel cuando quieras; al hacerlo, los dispositivos tendrán que introducir el nuevo.
 
-La web envía el archivo al bucket `our-memories` mediante un enlace temporal de subida y agrega una fila publicada a `memories`. Las descripciones se guardan en `caption`; al editar una de las 33 fotos anteriores se crea su fila si aún no existía. No hace falta ejecutar `seed_memories.sql` para esta función. Se aceptan JPG, PNG, WebP, MP4, WebM y MOV de hasta 45 MB; el límite real puede ser menor según los ajustes del bucket y del proyecto de Supabase. Para archivos grandes se usa subida reanudable.
+La web envía el archivo al bucket `our-memories` mediante un enlace temporal de subida y agrega una fila publicada a `memories`. Las descripciones se guardan en `caption`; al editar una de las 33 fotos anteriores se crea su fila si aún no existía. No hace falta ejecutar `seed_memories.sql` para esta función. Se aceptan JPG, PNG, WebP, MP4, WebM y MOV de hasta 45 MB; el límite real puede ser menor según los ajustes del bucket y del proyecto de Supabase. Durante la subida se muestra el paso actual o un error concreto.
