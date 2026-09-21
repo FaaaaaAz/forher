@@ -4,9 +4,9 @@ export function getSeason(today) {
   if (month === 9 && day >= 21) {
     return {
       id: 'yellow-flowers',
-      label: day === 21 ? 'Día del Amor · flores amarillas' : 'Flores amarillas para ti',
+      label: day === 21 ? 'Día del Amor' : 'Días de flores',
       motif: 'flower',
-      message: day === 21 ? 'Hoy el jardín se viste de amarillo para ti.' : 'Las flores amarillas siguen creciendo para ti.',
+      message: day === 21 ? 'Hoy el jardín se viste de flores para ti.' : 'Las flores siguen creciendo para ti.',
     };
   }
   if (month === 10) {

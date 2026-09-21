@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { getBoliviaDate, getTimeTogether } from './dates.js';
+import { getBoliviaClock, getBoliviaDate, getTimeTogether } from './dates.js';
 import { getSeason } from './season.js';
 
 test('cuenta los años, meses y días al 21 de septiembre de 2026', () => {
@@ -15,6 +15,10 @@ test('cuenta los años, meses y días al 21 de septiembre de 2026', () => {
 test('usa el calendario de Bolivia al cambiar de día', () => {
   assert.deepEqual(getBoliviaDate(new Date('2026-09-21T03:00:00Z')), { year: 2026, month: 9, day: 20 });
   assert.deepEqual(getBoliviaDate(new Date('2026-09-21T05:00:00Z')), { year: 2026, month: 9, day: 21 });
+});
+
+test('el contador usa horas, minutos y segundos de Bolivia', () => {
+  assert.deepEqual(getBoliviaClock(new Date('2026-09-21T05:23:45Z')), { hours: 1, minutes: 23, seconds: 45 });
 });
 
 test('cambia la decoración de flores a Halloween en octubre', () => {

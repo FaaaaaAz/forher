@@ -6,6 +6,22 @@ const boliviaFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'numeric',
   day: 'numeric',
 });
+const boliviaClockFormatter = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'America/La_Paz',
+  hourCycle: 'h23',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+});
+
+export function getBoliviaClock(now = new Date()) {
+  const parts = Object.fromEntries(
+    boliviaClockFormatter.formatToParts(now)
+      .filter(({ type }) => ['hour', 'minute', 'second'].includes(type))
+      .map(({ type, value }) => [type, Number(value)]),
+  );
+  return { hours: parts.hour, minutes: parts.minute, seconds: parts.second };
+}
 
 export function getBoliviaDate(now = new Date()) {
   const parts = Object.fromEntries(

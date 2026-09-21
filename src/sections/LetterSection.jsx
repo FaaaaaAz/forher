@@ -2,10 +2,11 @@ import LetterPreview from '../components/Letter/LetterPreview.jsx';
 
 export default function LetterSection() {
   return (
-    <section className="chapter" id="letter" aria-labelledby="letter-title">
-      <span className="chapter__number">04 / 05</span>
-      <div><p className="chapter__eyebrow">UNAS PALABRAS PARA TI</p><h2 id="letter-title">Querida Grace,</h2><LetterPreview /></div>
-      <span className="chapter__mark" aria-hidden="true">✉</span>
+    <section className="letter-section" id="letter" aria-labelledby="letter-title">
+      <p className="chapter__eyebrow">UNAS PALABRAS PARA TI</p>
+      <h2 id="letter-title">Una carta para <em>Grace.</em></h2>
+      <p>Hay cosas que se sienten mejor al escribirlas. Esta es una de ellas.</p>
+      <LetterPreview />
     </section>
   );
 }

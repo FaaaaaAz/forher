@@ -99,3 +99,16 @@ Vercel despliega nuevos cambios al recibir pushes en la rama de producción. [Ve
 - **La galería muestra fotos rotas:** revisa que `image_path` coincida exactamente con el nombre subido a `our-memories`, y que el bucket sea público.
 - **Error al consultar la tabla:** revisa la política RLS, el permiso `grant select`, la URL y la publishable key.
 - **La página funciona en ordenador pero algo se corta en iPhone:** prueba Safari con la página actualizada; los cambios de GitHub solo llegan a Vercel tras un despliegue correcto.
+
+## Añadir y editar recuerdos desde la web
+
+La sección **Fotos / Videos** deja ver todos los recuerdos. **Añadir o editar** pide un código compartido una vez por dispositivo. Quien tenga ese código puede subir fotos y videos y cambiar descripciones; no hay correo ni cuenta. No compartas el código con visitantes. La página pública puede mostrar los archivos del bucket mediante sus URL.
+
+Para activar la escritura en Vercel, abre **Project → Settings → Environment Variables** y agrega estas variables para **Production**:
+
+1. `MEMORY_ADMIN_CODE`: una frase o cadena secreta de al menos 12 caracteres, conocida por Fabian y Grace. No uses una palabra fácil de adivinar.
+2. `SUPABASE_SERVICE_ROLE_KEY`: la **secret key** o la clave `service_role` de **Supabase → Settings → API Keys**. Esta clave solo se usa en `api/memories.js`, que corre en Vercel. Nunca la pongas en una variable `VITE_`, en el repositorio o en una página.
+
+Después haz **Redeploy**. El valor de `VITE_SUPABASE_URL` ya configurado también debe estar disponible para la función del servidor. Puedes cambiar el código en Vercel cuando quieras; al hacerlo, los dispositivos tendrán que introducir el nuevo.
+
+La web envía el archivo al bucket `our-memories` mediante un enlace temporal de subida y agrega una fila publicada a `memories`. Las descripciones se guardan en `caption`; al editar una de las 33 fotos anteriores se crea su fila si aún no existía. No hace falta ejecutar `seed_memories.sql` para esta función. Se aceptan JPG, PNG, WebP, MP4, WebM y MOV de hasta 45 MB; el límite real puede ser menor según los ajustes del bucket y del proyecto de Supabase. Para archivos grandes se usa subida reanudable.

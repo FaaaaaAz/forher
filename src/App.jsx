@@ -7,17 +7,17 @@ import IntroSection from './sections/IntroSection.jsx';
 import GardenSection from './sections/GardenSection.jsx';
 import MemoriesSection from './sections/MemoriesSection.jsx';
 import LetterSection from './sections/LetterSection.jsx';
-import FinalSection from './sections/FinalSection.jsx';
 import { getBoliviaDate } from './utils/dates.js';
 import { getSeason } from './utils/season.js';
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [today, setToday] = useState(getBoliviaDate);
+  const [now, setNow] = useState(() => new Date());
+  const today = getBoliviaDate(now);
   const season = getSeason(today);
 
   useEffect(() => {
-    const interval = window.setInterval(() => setToday(getBoliviaDate()), 60000);
+    const interval = window.setInterval(() => setNow(new Date()), 1000);
     return () => window.clearInterval(interval);
   }, []);
 
@@ -37,12 +37,11 @@ export default function App() {
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
               <IntroSection isOpen season={season} />
-              <TogetherCounter today={today} />
-              <div className="chapters" aria-label="Próximos capítulos">
-                <GardenSection season={season} />
+              <TogetherCounter today={today} now={now} />
+              <div className="chapters" aria-label="Nuestra historia">
+                <GardenSection />
                 <MemoriesSection />
                 <LetterSection />
-                <FinalSection />
               </div>
             </motion.main>
           ) : (

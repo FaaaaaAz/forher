@@ -5,7 +5,7 @@ export default function MemoriesSection() {
     <section className="memories-section" id="memories" aria-labelledby="memories-title">
       <div className="memories-section__heading">
         <div>
-          <p className="chapter__eyebrow">03 / 05 · NUESTROS MOMENTOS</p>
+          <p className="chapter__eyebrow">NUESTROS MOMENTOS</p>
           <h2 id="memories-title">Instantes que <em>guardamos.</em></h2>
           <p>Fabian y Grace, en los días que queremos volver a vivir.</p>
         </div>
