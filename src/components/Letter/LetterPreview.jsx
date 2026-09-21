@@ -1,3 +1,3 @@
 export default function LetterPreview() {
-  return <p>Una carta espera el momento de ser escrita.</p>;
+  return <p>Grace, gracias por hacer especiales incluso los días más sencillos. Me encanta todo lo que somos y todo lo que aún vamos a vivir. — Fabian ♡</p>;
 }

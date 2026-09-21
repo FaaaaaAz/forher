@@ -1,6 +1,6 @@
-# Project Bloom: Supabase y Vercel, paso a paso
+# Fabian & Grace: Supabase y Vercel, paso a paso
 
-La web **ya funciona con las 33 fotos locales**. Por privacidad, esas fotos están excluidas de Git y no se subirán al repositorio público. Si configuras las dos variables `VITE_SUPABASE_*` y agregas recuerdos publicados a la tabla, la galería mostrará los datos de Supabase. Si todavía no hay registros, en tu computadora seguirá mostrando las fotos locales; en Vercel aparecerá un mensaje temporal hasta que completes Supabase.
+Las 33 fotos locales están excluidas de Git. En Vercel, la galería lee el bucket público de Supabase con las variables `VITE_SUPABASE_*`. Si la tabla `memories` todavía está vacía, usa la lista de nombres de `src/data/bundledMemories.js`; cuando agregues registros publicados, mostrará sus textos y orden.
 
 > **Privacidad:** el [repositorio actual](https://github.com/FaaaaaAz/forher) es público, por eso las fotos se quedan solo en tu computadora. Un bucket público de Supabase también deja las fotos accesibles por URL. Si quieres que solo ustedes dos puedan verlas, primero habrá que añadir autenticación y usar un bucket privado. Un enlace difícil de adivinar no equivale a privacidad.
 
@@ -10,7 +10,7 @@ En la pantalla **Create a new project** que enviaste:
 
 1. **Organization:** deja `Fabian's org` si es tu organización.
 2. **GitHub (optional):** déjalo sin seleccionar. El repositorio `FaaaaaAz/forher` se conectará a Vercel más adelante; este campo de Supabase no es necesario para la galería.
-3. **Project name:** escribe `project-bloom` o conserva `forher` si prefieres ese nombre interno. No cambia el nombre de la página.
+3. **Project name:** puedes conservar `forher` si prefieres ese nombre interno. No cambia el nombre de la página.
 4. **Database password:** genera una contraseña fuerte y guárdala en tu gestor de contraseñas. No la pongas en `.env`, GitHub ni Vercel: el navegador nunca la necesita.
 5. **Region:** abre `Americas` y elige la región sudamericana más cercana que te ofrezca Supabase. Después es difícil cambiarla sin migrar el proyecto.
 6. **Enable Data API:** déjalo activado; la galería consultará la tabla mediante esta API.
@@ -83,9 +83,9 @@ Una clave **publishable** está diseñada para estar en el cliente; la protecci�
 
 ## 6. Publicar en Vercel cuando estés listo
 
-1. Antes del despliegue, completa los pasos 1 a 5 para que la galería pueda usar Supabase; las fotos locales no viajarán con GitHub.
+1. Antes del despliegue, configura el bucket y las variables del paso 5; las fotos locales no viajarán con GitHub. La tabla del paso 2 agrega descripciones y orden editables, pero la galería puede mostrar las 33 fotos conocidas mientras esté vacía.
 2. En [Vercel](https://vercel.com/), entra con GitHub y elige **Add New → Project**.
-3. Importa `FaaaaaAz/forher` desde GitHub. El código de Project Bloom está en la raíz del repositorio.
+3. Importa `FaaaaaAz/forher` desde GitHub. El código está en la raíz del repositorio.
 4. Verifica: **Framework Preset: Vite**, **Root Directory: `./`**, **Build Command: `npm run build`**, **Output Directory: `dist`**. Vercel suele detectar Vite automáticamente.
 5. Añade en **Environment Variables** las dos variables `VITE_SUPABASE_URL` y `VITE_SUPABASE_PUBLISHABLE_KEY` para **Production**. La contraseña de la base de datos no se agrega.
 6. Pulsa **Deploy**. Abre la URL resultante y prueba en el iPhone: botón `Abrir 💛`, contador, galería y apertura de fotos.
@@ -95,7 +95,7 @@ Vercel despliega nuevos cambios al recibir pushes en la rama de producción. [Ve
 
 ## Si algo no aparece
 
-- **La galería sigue usando fotos locales:** comprueba que ambas variables están escritas exactamente, reinicia Vite o vuelve a desplegar, y verifica que `memories` tenga filas con `is_published = true`.
+- **La galería sigue usando fotos locales:** comprueba que ambas variables están escritas exactamente y reinicia Vite o vuelve a desplegar.
 - **La galería muestra fotos rotas:** revisa que `image_path` coincida exactamente con el nombre subido a `our-memories`, y que el bucket sea público.
 - **Error al consultar la tabla:** revisa la política RLS, el permiso `grant select`, la URL y la publishable key.
 - **La página funciona en ordenador pero algo se corta en iPhone:** prueba Safari con la página actualizada; los cambios de GitHub solo llegan a Vercel tras un despliegue correcto.

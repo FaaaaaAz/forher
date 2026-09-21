@@ -312,3 +312,85 @@ a { color: inherit; }
   .memory-dialog { padding: 18px; }
   .memory-dialog__content img { max-width: 100%; max-height: calc(100dvh - 90px); }
 }
+
+/* The shared space for Fabian and Grace */
+.site-shell--yellow-flowers {
+  --color-gold: #f3cf65;
+  --color-green: #a4ba91;
+  --color-line: rgba(243, 207, 101, 0.2);
+  background:
+    radial-gradient(circle at 78% 14%, rgba(157, 114, 57, .19), transparent 30%),
+    radial-gradient(circle at 15% 56%, rgba(80, 107, 71, .18), transparent 32%),
+    #101b18;
+}
+.welcome { overflow: hidden; }
+.welcome::before, .welcome::after {
+  content: '✿';
+  position: absolute;
+  color: rgba(243, 207, 101, .11);
+  font-size: clamp(180px, 30vw, 430px);
+  font-family: Georgia, serif;
+  line-height: 1;
+  pointer-events: none;
+  animation: flower-float 12s ease-in-out infinite;
+}
+.welcome::before { top: 2%; left: -8%; transform: rotate(-18deg); }
+.welcome::after { right: -8%; bottom: -14%; font-size: clamp(150px, 26vw, 340px); animation-delay: -5s; }
+.welcome__top { position: absolute; top: 34px; left: clamp(24px, 5vw, 80px); right: clamp(24px, 5vw, 80px); display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--color-muted); font-size: 9px; font-weight: 600; letter-spacing: .22em; text-align: right; }
+.welcome__top .wordmark { color: var(--color-cream); font-size: 13px; letter-spacing: .16em; white-space: nowrap; }
+.welcome__content { z-index: 1; }
+.welcome__aura { width: min(62vw, 700px); background: radial-gradient(circle, rgba(216, 173, 75, .19), rgba(99, 112, 75, .055) 46%, transparent 72%); border-color: rgba(250, 220, 143, .14); box-shadow: 0 0 0 80px rgba(207, 200, 151, .018), 0 0 0 170px rgba(207, 200, 151, .009); }
+.welcome__title { margin: 21px 0 28px; font-size: clamp(76px, 12vw, 165px); line-height: .91; text-shadow: 0 15px 75px rgba(0,0,0,.2); }
+.welcome__amp { color: var(--color-gold); font-size: .63em; font-style: italic; font-weight: 400; }
+.welcome__title em { display: inline-block; padding-right: .08em; }
+.welcome__description { max-width: 440px; color: #d3d1bf; font-size: clamp(15px, 1.5vw, 18px); }
+.welcome__season { gap: 11px; margin-top: 24px; font-family: var(--font-display); font-size: 16px; font-style: italic; letter-spacing: 0; }
+.welcome__season span { font-size: 20px; font-style: normal; }
+.open-button { min-height: 55px; margin-top: 28px; background: var(--color-gold); box-shadow: 0 16px 45px rgba(210, 167, 58, .16); }
+.open-button:hover { background: #ffe397; box-shadow: 0 18px 50px rgba(210, 167, 58, .27); }
+.welcome__footer { display: flex; align-items: center; gap: 12px; color: #b3b7a6; }
+.welcome__footer span { color: var(--color-gold); }
+.bloom-intro__art-ring { width: min(37vw, 460px); border-color: rgba(243, 207, 101, .2); box-shadow: 0 0 0 38px rgba(243, 207, 101, .025), inset 0 0 90px rgba(243, 207, 101, .06); }
+.bloom-intro__art::before, .bloom-intro__art::after { content: '♡'; position: absolute; color: var(--color-gold); font-family: Georgia, serif; font-size: 28px; opacity: .7; animation: heart-rise 6s ease-in-out infinite; }
+.bloom-intro__art::before { top: 17%; left: 16%; }
+.bloom-intro__art::after { bottom: 27%; right: 12%; font-size: 18px; animation-delay: -3s; }
+.seedling__stem { height: 150px; background: linear-gradient(#a5c59c, #526f50); }
+.seedling__flower { position: absolute; z-index: 2; left: 50%; bottom: 177px; width: 76px; height: 76px; transform: translateX(-50%); animation: flower-appear 1s 1.8s both ease-out, flower-sway 6s 2.8s ease-in-out infinite; }
+.seedling__flower i { position: absolute; top: 0; left: 26px; width: 25px; height: 43px; border-radius: 80% 80% 45% 45%; transform-origin: 12px 38px; background: linear-gradient(#ffe589, #dfae3d); box-shadow: 0 0 18px rgba(243,207,101,.13); }
+.seedling__flower i:nth-child(2) { transform: rotate(45deg); }
+.seedling__flower i:nth-child(3) { transform: rotate(90deg); }
+.seedling__flower i:nth-child(4) { transform: rotate(135deg); }
+.seedling__flower i:nth-child(5) { transform: rotate(180deg); }
+.seedling__flower i:nth-child(6) { transform: rotate(225deg); }
+.seedling__flower i:nth-child(7) { transform: rotate(270deg); }
+.seedling__flower i:nth-child(8) { transform: rotate(315deg); }
+.seedling__flower b { position: absolute; top: 27px; left: 27px; width: 23px; height: 23px; border-radius: 50%; background: #76572b; box-shadow: inset 0 0 0 5px #ad7a36, 0 0 10px rgba(44,30,12,.3); }
+.chapter { transition: background .3s ease, padding .3s ease; }
+.chapter:hover { background: rgba(243, 207, 101, .025); padding-left: 12px; padding-right: 12px; }
+.chapter:nth-child(3) { min-height: 270px; }
+.chapter:nth-child(3) p:last-child { max-width: 650px; font-family: var(--font-display); font-size: clamp(17px, 2vw, 22px); line-height: 1.5; }
+.memory-card button { border-radius: 6px; box-shadow: 0 14px 30px rgba(0,0,0,.14); }
+.memory-card:nth-child(5n+2) { transform: translateY(14px); }
+.memory-card figcaption { color: #c6c7b5; }
+@keyframes flower-float { 0%,100% { translate: 0 0; rotate: -6deg; } 50% { translate: 0 -18px; rotate: 6deg; } }
+@keyframes heart-rise { 0%,100% { transform: translateY(0) rotate(-10deg); opacity: .45; } 50% { transform: translateY(-16px) rotate(8deg); opacity: .85; } }
+@keyframes flower-appear { from { opacity: 0; scale: .2; } to { opacity: 1; scale: 1; } }
+@keyframes flower-sway { 0%,100% { rotate: -5deg; } 50% { rotate: 5deg; } }
+@media (max-width: 760px) {
+  .welcome { padding-top: 115px; padding-bottom: 110px; }
+  .welcome__top { top: 24px; align-items: flex-start; }
+  .welcome__top > span:last-child { max-width: 150px; line-height: 1.5; }
+  .welcome__title { font-size: clamp(54px, 16vw, 86px); }
+  .welcome__aura { width: 90vw; }
+  .welcome__footer { bottom: 27px; padding: 0 24px; text-align: center; font-size: 8px; letter-spacing: .15em; }
+  .bloom-intro__art-ring { width: 290px; }
+  .memory-card:nth-child(5n+2) { transform: none; }
+  .chapter:hover { padding-left: 0; padding-right: 0; }
+}
+@media (max-width: 400px) {
+  .welcome__title { font-size: 16vw; }
+  .welcome__description { max-width: 285px; }
+  .welcome__season { font-size: 14px; }
+  .open-button { gap: 20px; padding-left: 20px; }
+  .bloom-intro__art-ring { width: 240px; }
+}

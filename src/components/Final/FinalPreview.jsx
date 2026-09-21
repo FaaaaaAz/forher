@@ -1,3 +1,3 @@
 export default function FinalPreview() {
-  return <p>El último capítulo de este pequeño comienzo.</p>;
+  return <p>Esta página crecerá con nosotros: más recuerdos, más estaciones y más momentos para volver a mirar juntos.</p>;
 }
