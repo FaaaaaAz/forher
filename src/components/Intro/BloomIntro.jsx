@@ -1,11 +1,11 @@
 import Seedling from '../Garden/Seedling.jsx';
 
-export default function BloomIntro() {
+export default function BloomIntro({ season }) {
   return (
     <section className="bloom-intro" aria-labelledby="bloom-title">
       <div className="bloom-intro__topline">
         <span className="wordmark"><span className="wordmark__symbol" aria-hidden="true">✳</span> PROJECT BLOOM</span>
-        <span className="chapter-count">01 / 05</span>
+        <div className="bloom-intro__topright"><span className="season-label">{season.label}</span><span className="chapter-count">01 / 05</span></div>
       </div>
 
       <div className="bloom-intro__content">

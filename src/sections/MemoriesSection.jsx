@@ -2,10 +2,16 @@ import MemoriesPreview from '../components/Memories/MemoriesPreview.jsx';
 
 export default function MemoriesSection() {
   return (
-    <section className="chapter" id="memories" aria-labelledby="memories-title">
-      <span className="chapter__number">03 / 05</span>
-      <div><p className="chapter__eyebrow">PRÓXIMAMENTE</p><h2 id="memories-title">Los recuerdos</h2><MemoriesPreview /></div>
-      <span className="chapter__mark" aria-hidden="true">✦</span>
+    <section className="memories-section" id="memories" aria-labelledby="memories-title">
+      <div className="memories-section__heading">
+        <div>
+          <p className="chapter__eyebrow">03 / 05 · NUESTROS MOMENTOS</p>
+          <h2 id="memories-title">Instantes que <em>guardamos.</em></h2>
+          <p>Pequeños pedazos de nuestra historia, siempre cerca.</p>
+        </div>
+        <span className="memories-section__symbol" aria-hidden="true">✦</span>
+      </div>
+      <MemoriesPreview />
     </section>
   );
 }

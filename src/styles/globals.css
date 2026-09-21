@@ -25,6 +25,11 @@ a { color: inherit; }
   background: radial-gradient(ellipse 70% 68% at 50% 50%, #19231c 0%, var(--color-night) 73%);
 }
 
+.site-shell--halloween { --color-gold: #e2a56e; --color-green: #a8a18f; }
+.site-shell--spring { --color-gold: #c7d89d; }
+.site-shell--winter { --color-gold: #c8d6c9; }
+.site-shell--autumn { --color-gold: #dbad7c; }
+
 .site-shell::before {
   content: '';
   position: fixed;
@@ -203,4 +208,94 @@ a { color: inherit; }
   .bloom-intro__art-ring { width: 240px; }
   .seedling { transform: scale(0.67); }
   .chapter { grid-template-columns: 48px 1fr 20px; }
+}
+
+.seasonal-decor { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.seasonal-decor__item { position: absolute; display: grid; place-items: center; width: 36px; height: 36px; opacity: 0.52; animation: seasonal-drift 8s ease-in-out infinite; }
+.seasonal-decor__item--1 { top: 14%; left: 10%; animation-delay: -1s; }
+.seasonal-decor__item--2 { top: 26%; right: 13%; animation-delay: -3s; }
+.seasonal-decor__item--3 { top: 58%; left: 8%; animation-delay: -5s; }
+.seasonal-decor__item--4 { top: 72%; right: 10%; animation-delay: -2s; }
+.seasonal-decor__item--5 { top: 84%; left: 23%; animation-delay: -6s; }
+.seasonal-decor__item--6 { top: 12%; right: 31%; animation-delay: -4s; }
+.seasonal-decor__item--7 { top: 80%; right: 34%; animation-delay: -7s; }
+.seasonal-motif { position: relative; display: block; }
+.seasonal-motif--flower { width: 8px; height: 8px; border-radius: 50%; background: #e6af4f; box-shadow: 0 0 12px rgba(227, 190, 86, 0.35); }
+.seasonal-motif--flower i { position: absolute; top: -12px; left: -1px; width: 10px; height: 13px; border-radius: 80% 80% 45% 45%; background: #f0d268; transform-origin: 5px 16px; }
+.seasonal-motif--flower i:nth-child(2) { transform: rotate(72deg); }
+.seasonal-motif--flower i:nth-child(3) { transform: rotate(144deg); }
+.seasonal-motif--flower i:nth-child(4) { transform: rotate(216deg); }
+.seasonal-motif--flower i:nth-child(5) { transform: rotate(288deg); }
+.seasonal-motif--heart { width: 14px; height: 14px; transform: rotate(-45deg); background: #e8c36f; }
+.seasonal-motif--heart::before, .seasonal-motif--heart::after { content: ''; position: absolute; width: 14px; height: 14px; border-radius: 50%; background: inherit; }
+.seasonal-motif--heart::before { top: -7px; left: 0; }
+.seasonal-motif--heart::after { top: 0; left: 7px; }
+.seasonal-motif--pumpkin { width: 29px; height: 24px; border-radius: 42% 42% 46% 46%; background: #cf824d; box-shadow: inset 7px 0 #bd7045, inset -7px 0 #e29a5e; }
+.seasonal-motif--pumpkin::before { content: ''; position: absolute; top: -7px; left: 13px; width: 4px; height: 9px; border-radius: 3px; background: #90aa73; transform: rotate(18deg); }
+.seasonal-motif--sun { width: 21px; height: 21px; border-radius: 50%; background: #eacb86; box-shadow: 0 0 0 5px rgba(234, 203, 134, 0.14), 0 0 24px rgba(234, 203, 134, 0.35); }
+.seasonal-motif--leaf { width: 25px; height: 15px; border-radius: 90% 5% 90% 5%; background: #bf916b; transform: rotate(-25deg); }
+.seasonal-motif--spark { width: 2px; height: 23px; background: #d5dfd5; border-radius: 10px; box-shadow: 0 0 14px #d5dfd5; }
+.seasonal-motif--spark::after { content: ''; position: absolute; top: 10px; left: -10px; width: 23px; height: 2px; background: inherit; border-radius: inherit; }
+
+.welcome__season { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 18px 0 0; color: var(--color-gold); font-size: 11px; letter-spacing: 0.1em; }
+.welcome__season span { font-size: 16px; }
+.bloom-intro__topright { display: flex; align-items: center; gap: 28px; }
+.season-label { color: var(--color-gold); font-size: 10px; letter-spacing: 0.08em; }
+
+.together { position: relative; padding: 110px clamp(24px, 6vw, 88px); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); background: linear-gradient(145deg, rgba(161, 184, 141, 0.05), rgba(222, 197, 137, 0.025)); }
+.together__inner { max-width: 1100px; margin: 0 auto; }
+.together h2, .memories-section h2 { font-family: var(--font-display); font-size: clamp(45px, 6vw, 82px); font-weight: 400; letter-spacing: -0.055em; line-height: 1.05; }
+.together h2 { max-width: 760px; margin: 26px 0 48px; }
+.together h2 em, .memories-section h2 em { color: var(--color-gold); font-weight: 400; }
+.together__count { display: flex; gap: clamp(20px, 7vw, 110px); }
+.together__unit { display: flex; flex-direction: column; gap: 7px; min-width: 120px; }
+.together__number { font-family: var(--font-display); font-size: clamp(68px, 10vw, 130px); letter-spacing: -0.08em; line-height: 0.95; }
+.together__label { padding-left: 5px; color: var(--color-gold); font-size: 12px; letter-spacing: 0.17em; text-transform: uppercase; }
+.together__footnote { margin: 44px 0 0; color: var(--color-muted); font-size: 14px; line-height: 1.6; }
+
+.memories-section { padding: 100px 0 120px; border-top: 1px solid var(--color-line); }
+.memories-section__heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 42px; }
+.memories-section h2 { max-width: 830px; margin: 12px 0 15px; }
+.memories-section__heading p:last-child { margin: 0; color: var(--color-muted); font-size: 15px; line-height: 1.7; }
+.memories-section__empty { margin: 0; padding: 34px; border: 1px solid var(--color-line); border-radius: 12px; color: var(--color-muted); text-align: center; }
+.memories-section__symbol { padding-bottom: 20px; color: var(--color-gold); font-family: var(--font-display); font-size: 48px; }
+.memory-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 16px; }
+.memory-card { min-width: 0; margin: 0; }
+.memory-card button { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid rgba(237, 222, 177, 0.14); border-radius: 12px; background: #1a221c; cursor: zoom-in; }
+.memory-card img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; transition: transform 550ms ease, filter 550ms ease; }
+.memory-card button:hover img { transform: scale(1.05); filter: brightness(1.08); }
+.memory-card__view { position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center; width: 33px; height: 33px; border: 1px solid rgba(255,255,255,0.25); border-radius: 50%; background: rgba(11,18,16,0.7); color: white; font-size: 17px; backdrop-filter: blur(5px); }
+.memory-card figcaption { overflow: hidden; margin-top: 11px; color: #9ca79b; font-size: 10px; font-weight: 600; letter-spacing: 0.11em; text-overflow: ellipsis; white-space: nowrap; }
+.memory-dialog { max-width: none; max-height: none; width: 100vw; height: 100dvh; margin: 0; padding: 24px; border: 0; background: rgba(8, 12, 10, 0.95); color: var(--color-cream); }
+.memory-dialog::backdrop { background: rgba(0,0,0,0.86); backdrop-filter: blur(10px); }
+.memory-dialog__content { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%; }
+.memory-dialog__content img { display: block; max-width: min(92vw, 1200px); max-height: calc(100dvh - 100px); width: auto; height: auto; object-fit: contain; border-radius: 5px; }
+.memory-dialog__content p { margin: 14px 0 0; color: var(--color-muted); font-size: 14px; }
+.memory-dialog__close { position: fixed; top: max(18px, env(safe-area-inset-top)); right: max(22px, env(safe-area-inset-right)); z-index: 1; display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid var(--color-line); border-radius: 50%; background: #222b24; color: white; cursor: pointer; font-size: 29px; line-height: 1; }
+
+@media (max-width: 1000px) { .memory-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .seasonal-decor__item { opacity: 0.38; transform: scale(0.75); }
+  .seasonal-decor__item--1 { left: 4%; }
+  .seasonal-decor__item--2 { right: 4%; }
+  .seasonal-decor__item--3 { left: 1%; }
+  .seasonal-decor__item--4 { right: 2%; }
+  .seasonal-decor__item--6 { display: none; }
+  .bloom-intro__topright { gap: 10px; }
+  .season-label { max-width: 92px; text-align: right; font-size: 9px; line-height: 1.4; }
+  .together { padding-top: 78px; padding-bottom: 80px; }
+  .together h2 { margin-bottom: 35px; }
+  .together__count { gap: 10px; justify-content: space-between; }
+  .together__unit { min-width: 0; }
+  .together__number { font-size: clamp(53px, 15vw, 88px); }
+  .together__label { font-size: 10px; }
+  .together__footnote { margin-top: 34px; font-size: 13px; }
+  .memories-section { padding-top: 78px; padding-bottom: 90px; }
+  .memories-section h2 { font-size: clamp(45px, 10vw, 68px); }
+  .memories-section__symbol { display: none; }
+  .memory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 23px 12px; }
+  .memory-card figcaption { font-size: 9px; }
+  .memory-card__view { width: 27px; height: 27px; right: 8px; bottom: 8px; font-size: 14px; }
+  .memory-dialog { padding: 18px; }
+  .memory-dialog__content img { max-width: 100%; max-height: calc(100dvh - 90px); }
 }

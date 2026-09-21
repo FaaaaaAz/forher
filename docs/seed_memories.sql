@@ -1,0 +1,38 @@
+-- Sube primero estas 33 fotos al bucket publico our-memories.
+-- Ejecuta este archivo en Supabase SQL Editor; repetirlo no duplica filas.
+insert into public.memories (image_path, alt, sort_order, is_published)
+values
+  ('5013046490745736540.jpg', 'Una selfie de los dos al aire libre', 1, true),
+  ('5013046490745736554.jpg', 'Un beso con las montañas de fondo', 2, true),
+  ('5013046490745736539.jpg', 'Nuestras manos entrelazadas', 3, true),
+  ('5013046490745736574.jpg', 'Una selfie de los dos rodeados de naturaleza', 4, true),
+  ('5013046490745736537.jpg', 'Nosotros con máscaras divertidas frente a un espejo', 5, true),
+  ('5013046490745736538.jpg', 'Un abrazo juntos frente a un espejo', 6, true),
+  ('5013046490745736541.jpg', 'Nosotros juntos bajo los árboles', 7, true),
+  ('5013046490745736542.jpg', 'Un momento tranquilo al aire libre', 8, true),
+  ('5013046490745736543.jpg', 'Compartiendo algo dulce', 9, true),
+  ('5013046490745736544.jpg', 'Una selfie durante un paseo entre montañas', 10, true),
+  ('5013046490745736545.jpg', 'Una selfie muy cerca el uno del otro', 11, true),
+  ('5013046490745736546.jpg', 'Un abrazo frente al espejo', 12, true),
+  ('5013046490745736552.jpg', 'Una tarde divertida juntos en casa', 13, true),
+  ('5013046490745736553.jpg', 'Otro momento de esa tarde juntos', 14, true),
+  ('5013046490745736555.jpg', 'Caminando juntos por la montaña', 15, true),
+  ('5013046490745736556.jpg', 'Juntos frente a un paisaje abierto', 16, true),
+  ('5013046490745736557.jpg', 'Una selfie durante nuestra caminata', 17, true),
+  ('5013046490745736558.jpg', 'Descansando juntos y sonriendo a la cámara', 18, true),
+  ('5013046490745736559.jpg', 'Nosotros sentados juntos en casa', 19, true),
+  ('5013046490745736560.jpg', 'Una selfie haciendo caras divertidas', 20, true),
+  ('5013046490745736561.jpg', 'Una tarde compartida en el sofá', 21, true),
+  ('5013046490745736563.jpg', 'Nosotros con ropa amarilla', 22, true),
+  ('5013046490745736564.jpg', 'Una caminata de noche', 23, true),
+  ('5013046490745736565.jpg', 'Un abrazo durante una salida nocturna', 24, true),
+  ('5013046490745736566.jpg', 'Una selfie frente al espejo con flores', 25, true),
+  ('5013046490745736567.jpg', 'Una foto juntos frente al espejo', 26, true),
+  ('5013046490745736568.jpg', 'Un momento tierno con un perrito', 27, true),
+  ('5013046490745736569.jpg', 'Otro momento tierno con un perrito', 28, true),
+  ('5013046490745736570.jpg', 'Nosotros juntos en una salida', 29, true),
+  ('5013046490745736571.jpg', 'Compartiendo bebidas y una sonrisa', 30, true),
+  ('5013046490745736572.jpg', 'Una tarde juntos en la piscina', 31, true),
+  ('5013046490745736573.jpg', 'Una cena compartida', 32, true),
+  ('5013046490745736575.jpg', 'Una foto especial para guardar', 33, true)
+on conflict (image_path) do nothing;

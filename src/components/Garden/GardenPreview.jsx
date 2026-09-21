@@ -1,3 +1,3 @@
-export default function GardenPreview() {
-  return <p>Un espacio para las flores que crecerán en esta historia.</p>;
+export default function GardenPreview({ season }) {
+  return <p>{season.message}</p>;
 }

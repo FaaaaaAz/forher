@@ -23,6 +23,11 @@
   50% { opacity: 0.75; transform: translateX(-50%) scale(1.05); }
 }
 
+@keyframes seasonal-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg); }
+  50% { transform: translate3d(8px, -15px, 0) rotate(9deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

@@ -3,3 +3,7 @@ dist/
 .env
 .env.local
 .DS_Store
+
+# Fotografías personales: se usan localmente y no se suben al repositorio público.
+src/assets/images/*
+!src/assets/images/.gitkeep
