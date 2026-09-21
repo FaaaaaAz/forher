@@ -13,6 +13,7 @@ export default function BloomIntro({ season }) {
           <p className="eyebrow"><span className="eyebrow__line" /> CAPÍTULO UNO · EL COMIENZO</p>
           <h1 id="bloom-title">Todo empieza<br />con <em>una semilla.</em></h1>
           <p className="bloom-intro__description">Una pequeña historia para guardar lo que hemos vivido y dejar espacio a todo lo que aún puede florecer.</p>
+          <p className="couple-signature couple-signature--story">Fabian <span>&amp;</span> Grace</p>
           <a className="text-link" href="#garden">Explorar la historia <span aria-hidden="true">↓</span></a>
         </div>
         <div className="bloom-intro__art">

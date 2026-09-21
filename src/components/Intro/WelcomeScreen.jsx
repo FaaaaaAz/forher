@@ -9,6 +9,7 @@ export default function WelcomeScreen({ onOpen, season }) {
           <em>para ti...</em>
         </h1>
         <p className="welcome__description">Hay historias que merecen florecer despacio.</p>
+        <p className="couple-signature couple-signature--welcome">Fabian <span>&amp;</span> Grace</p>
         <p className="welcome__season"><span aria-hidden="true">✳</span> {season.label}</p>
         <button className="open-button" type="button" onClick={onOpen}>
           Abrir 💛 <span className="open-button__arrow" aria-hidden="true">↗</span>

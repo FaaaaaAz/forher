@@ -106,6 +106,19 @@ a { color: inherit; }
   letter-spacing: 0.025em;
   line-height: 1.7;
 }
+.couple-signature {
+  margin: 0;
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: clamp(25px, 3vw, 37px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.couple-signature span { padding: 0 0.08em; color: var(--color-gold); font-style: italic; }
+.couple-signature--welcome { margin-top: 15px; }
+.couple-signature--story { margin-top: 20px; font-size: clamp(25px, 2.5vw, 32px); }
 .open-button {
   display: inline-flex;
   justify-content: center;
