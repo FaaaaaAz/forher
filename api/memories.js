@@ -7,6 +7,20 @@ const allowedExtensions = new Map([
   ['image/jpeg', 'jpg'], ['image/png', 'png'], ['image/webp', 'webp'],
   ['video/mp4', 'mp4'], ['video/webm', 'webm'], ['video/quicktime', 'mov'],
 ]);
+const detailExtensions = new Map([['image/jpeg', 'jpg'], ['image/png', 'png'], ['image/webp', 'webp']]);
+const detailSlots = ['gifts', 'flowers'];
+
+async function detailPhotos(supabase) {
+  const details = {};
+  for (const slot of detailSlots) {
+    const { data, error } = await supabase.storage.from(bucket).list(`details/${slot}`, { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
+    if (error) throw error;
+    const photo = data?.filter((item) => item.id && /\.(jpg|png|webp)$/i.test(item.name))
+      .sort((first, second) => new Date(second.created_at) - new Date(first.created_at))[0];
+    details[slot] = photo ? `details/${slot}/${photo.name}` : null;
+  }
+  return details;
+}
 
 function hasAccess(value) {
   const expected = process.env.MEMORY_ADMIN_CODE;
@@ -39,6 +53,11 @@ export default async function handler(req, res) {
     const { action } = req.body ?? {};
     const supabase = client();
 
+    if (req.method === 'GET' && req.query?.view === 'details') {
+      res.setHeader?.('Cache-Control', 'no-store');
+      return res.status(200).json({ details: await detailPhotos(supabase) });
+    }
+
     if (req.method === 'GET') {
       res.setHeader?.('Cache-Control', 'no-store');
       const { data, error } = await supabase.from('memories').select('id,image_path,alt,caption,sort_order,is_published').order('sort_order');
@@ -60,6 +79,17 @@ export default async function handler(req, res) {
       const extension = allowedExtensions.get(req.body?.contentType);
       if (!extension) return res.status(400).json({ error: 'Formato de archivo no compatible.' });
       const path = `uploads/${randomUUID()}.${extension}`;
+      const { data, error } = await supabase.storage.from(bucket).createSignedUploadUrl(path);
+      if (error) throw error;
+      return res.status(200).json({ path, token: data.token });
+    }
+
+    if (action === 'detail-upload-url') {
+      const { slot, contentType } = req.body;
+      if (!detailSlots.includes(slot) || !detailExtensions.has(contentType)) return res.status(400).json({ error: 'Elige una foto JPG, PNG o WebP para uno de los dos espacios.' });
+      const details = await detailPhotos(supabase);
+      if (details[slot]) return res.status(409).json({ error: 'Este espacio ya tiene una foto y no se puede cambiar desde la página.' });
+      const path = `details/${slot}/${randomUUID()}.${detailExtensions.get(contentType)}`;
       const { data, error } = await supabase.storage.from(bucket).createSignedUploadUrl(path);
       if (error) throw error;
       return res.status(200).json({ path, token: data.token });

@@ -97,3 +97,45 @@ test('el borrado oculta una foto inicial y elimina su archivo', async () => {
     globalThis.fetch = previousFetch;
   }
 });
+
+test('los dos espacios de regalo se consultan y solo el vacío admite una subida', async () => {
+  const previousCode = process.env.MEMORY_ADMIN_CODE;
+  const previousKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const previousUrl = process.env.VITE_SUPABASE_URL;
+  const previousFetch = globalThis.fetch;
+  process.env.MEMORY_ADMIN_CODE = 'test-secret-long-enough';
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
+  process.env.VITE_SUPABASE_URL = 'https://example.supabase.co';
+  globalThis.fetch = async (url, options = {}) => {
+    if (String(url).includes('/object/list/our-memories')) {
+      const { prefix } = JSON.parse(options.body);
+      return Response.json(prefix === 'details/gifts' ? [{ id: 'photo-1', name: 'gift.jpg', created_at: '2026-09-21T12:00:00Z' }] : []);
+    }
+    if (String(url).includes('/object/upload/sign/')) return Response.json({ url: '/object/upload/sign/our-memories/details/flowers/new.jpg?token=test-token' });
+    throw new Error(`Solicitud inesperada: ${url}`);
+  };
+  try {
+    const listed = response();
+    await handler({ method: 'GET', headers: {}, query: { view: 'details' } }, listed);
+    assert.equal(listed.statusCode, 200);
+    assert.deepEqual(listed.body.details, { gifts: 'details/gifts/gift.jpg', flowers: null });
+
+    const filled = response();
+    await handler({ method: 'POST', headers: { 'x-memory-code': 'test-secret-long-enough' }, body: { action: 'detail-upload-url', slot: 'gifts', contentType: 'image/jpeg' } }, filled);
+    assert.equal(filled.statusCode, 409);
+
+    const empty = response();
+    await handler({ method: 'POST', headers: { 'x-memory-code': 'test-secret-long-enough' }, body: { action: 'detail-upload-url', slot: 'flowers', contentType: 'image/jpeg' } }, empty);
+    assert.equal(empty.statusCode, 200);
+    assert.match(empty.body.path, /^details\/flowers\/[a-f0-9-]+\.jpg$/);
+    assert.equal(empty.body.token, 'test-token');
+  } finally {
+    if (previousCode === undefined) delete process.env.MEMORY_ADMIN_CODE;
+    else process.env.MEMORY_ADMIN_CODE = previousCode;
+    if (previousKey === undefined) delete process.env.SUPABASE_SERVICE_ROLE_KEY;
+    else process.env.SUPABASE_SERVICE_ROLE_KEY = previousKey;
+    if (previousUrl === undefined) delete process.env.VITE_SUPABASE_URL;
+    else process.env.VITE_SUPABASE_URL = previousUrl;
+    globalThis.fetch = previousFetch;
+  }
+});
