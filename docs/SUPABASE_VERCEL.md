@@ -104,7 +104,7 @@ Vercel despliega nuevos cambios al recibir pushes en la rama de producción. [Ve
 
 ## Añadir y editar recuerdos desde la web
 
-La sección de recuerdos muestra dos entradas, **Fotos** y **Videos**. Dentro de cada álbum, **Añadir recuerdo** pide un código compartido una vez por dispositivo. Cada foto o video tiene su propio botón **Editar descripción**. Quien tenga el código puede subir archivos y cambiar descripciones; no hay correo ni cuenta. No compartas el código con visitantes. La página pública puede mostrar los archivos del bucket mediante sus URL.
+La sección de recuerdos muestra dos entradas, **Fotos** y **Videos**. Dentro de cada álbum, **Añadir recuerdo** pide un código compartido una vez por dispositivo. Cada foto o video tiene su propio botón **Editar o eliminar**. Quien tenga el código puede subir archivos, cambiar descripciones y borrar recuerdos; no hay correo ni cuenta. No compartas el código con visitantes. La página pública puede mostrar los archivos del bucket mediante sus URL.
 
 Para activar la escritura en Vercel, abre **Project → Settings → Environment Variables** y agrega estas variables para **Production**:
 
@@ -116,3 +116,5 @@ Después haz **Redeploy**. El valor de `VITE_SUPABASE_URL` ya configurado tambi�
 **Permiso de la tabla:** en **Supabase → SQL Editor → New query**, ejecuta el contenido de [`docs/enable_memory_editor.sql`](enable_memory_editor.sql). El proyecto creó `memories` con lectura anónima, pero la función del servidor también necesita `SELECT`, `INSERT` y `UPDATE` para `service_role`. La instrucción no da permisos de escritura a visitantes y se puede ejecutar de nuevo sin problema. Si aparece `permission denied for table memories`, este paso aún falta. [Supabase: grants y RLS](https://supabase.com/docs/guides/api/securing-your-api).
 
 La web envía el archivo al bucket `our-memories` mediante un enlace temporal de subida y agrega una fila publicada a `memories`. Las descripciones se guardan en `caption`; al editar una de las 33 fotos anteriores se crea su fila si aún no existía. No hace falta ejecutar `seed_memories.sql` para esta función. Se aceptan JPG, PNG, WebP, MP4, WebM y MOV de hasta 45 MB; el límite real puede ser menor según los ajustes del bucket y del proyecto de Supabase. Durante la subida se muestra el paso actual o un error concreto.
+
+Para borrar una foto o video, abre su álbum, pulsa **Editar o eliminar** y confirma **Sí, eliminar**. El servidor marca la fila como no publicada y borra el archivo de Storage. Las fotos iniciales también quedan registradas como eliminadas para que la lista de respaldo no las vuelva a mostrar. Esta acción no se puede deshacer. Si Storage falla, la foto desaparece del álbum y la página avisa que el archivo debe borrarse manualmente en Supabase Storage. El permiso `SELECT`, `INSERT` y `UPDATE` de `docs/enable_memory_editor.sql` también cubre esta función; no necesitas dar permiso `DELETE` sobre la tabla.

@@ -29,15 +29,26 @@ function cleanCaption(value) {
 }
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido.' });
+  if (req.method !== 'POST' && req.method !== 'GET') return res.status(405).json({ error: 'Método no permitido.' });
   if (!process.env.MEMORY_ADMIN_CODE || !process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.VITE_SUPABASE_URL) {
     return res.status(503).json({ error: 'Falta activar la administración de recuerdos en Vercel.' });
   }
-  if (!hasAccess(req.headers['x-memory-code'])) return res.status(401).json({ error: 'Código incorrecto.' });
+  if (req.method === 'POST' && !hasAccess(req.headers['x-memory-code'])) return res.status(401).json({ error: 'Código incorrecto.' });
 
   try {
     const { action } = req.body ?? {};
     const supabase = client();
+
+    if (req.method === 'GET') {
+      res.setHeader?.('Cache-Control', 'no-store');
+      const { data, error } = await supabase.from('memories').select('id,image_path,alt,caption,sort_order,is_published').order('sort_order');
+      if (error) throw error;
+      const bundledPaths = new Set(bundledMemories.map((memory) => memory.image_path));
+      return res.status(200).json({
+        memories: data.filter((memory) => memory.is_published).map(({ is_published, ...memory }) => memory),
+        hiddenBundledPaths: data.filter((memory) => !memory.is_published && bundledPaths.has(memory.image_path)).map((memory) => memory.image_path),
+      });
+    }
 
     if (action === 'verify') {
       const { error } = await supabase.from('memories').select('id').limit(1);
@@ -91,6 +102,28 @@ export default async function handler(req, res) {
         });
         if (error) throw error;
       }
+      return res.status(200).json({ ok: true });
+    }
+
+    if (action === 'delete') {
+      const { path } = req.body;
+      if (typeof path !== 'string' || path.length > 240) return res.status(400).json({ error: 'Recuerdo no válido.' });
+      const index = bundledMemories.findIndex((memory) => memory.image_path === path);
+      const { data: existing, error: findError } = await supabase.from('memories').select('id').eq('image_path', path).maybeSingle();
+      if (findError) throw findError;
+      if (!existing && index === -1) return res.status(404).json({ error: 'No se encontró el recuerdo.' });
+
+      if (existing) {
+        const { error } = await supabase.from('memories').update({ is_published: false }).eq('id', existing.id);
+        if (error) throw error;
+      } else {
+        const { error } = await supabase.from('memories').insert({
+          image_path: path, alt: 'Recuerdo eliminado', caption: '', sort_order: index + 1, is_published: false,
+        });
+        if (error) throw error;
+      }
+      const { error: storageError } = await supabase.storage.from(bucket).remove([path]);
+      if (storageError) return res.status(200).json({ ok: true, warning: 'Se quitó del álbum, pero no se pudo borrar el archivo del bucket. Bórralo en Supabase Storage.' });
       return res.status(200).json({ ok: true });
     }
 

@@ -75,7 +75,7 @@ export default function MemoriesPreview() {
                   <span className="memory-card__view" aria-hidden="true">{memory.mediaType === 'video' ? <svg viewBox="0 0 24 24" fill="currentColor"><path d="m8 5 12 7-12 7V5Z" /></svg> : <ExpandIcon />}</span>
                 </button>
                 <figcaption>{memory.caption || 'Un momento nuestro ♡'}</figcaption>
-                <button className="memory-card__edit" type="button" onClick={() => setManager({ mode: 'edit', memory })}>Editar descripción</button>
+                <button className="memory-card__edit" type="button" onClick={() => setManager({ mode: 'edit', memory })}>Editar o eliminar</button>
               </motion.figure>
             ))}
           </div>

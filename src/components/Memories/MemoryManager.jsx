@@ -11,6 +11,7 @@ export default function MemoryManager({ mode, memory, onChanged, onClose }) {
   const [busy, setBusy] = useState(false);
   const [stage, setStage] = useState('');
   const [message, setMessage] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => { panelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, []);
   useEffect(() => {
@@ -64,6 +65,27 @@ export default function MemoryManager({ mode, memory, onChanged, onClose }) {
     }
   }
 
+  async function removeMemory() {
+    setBusy(true);
+    setMessage('');
+    setStage('Eliminando el recuerdo...');
+    try {
+      const result = await memoryRequest(code, { action: 'delete', path: memory.image_path });
+      await onChanged();
+      if (result.warning) {
+        setMessage(result.warning);
+        setConfirmDelete(false);
+      } else {
+        onClose();
+      }
+    } catch (error) {
+      setMessage(error.message || 'No se pudo eliminar el recuerdo.');
+    } finally {
+      setStage('');
+      setBusy(false);
+    }
+  }
+
   return (
     <div className="memory-manager" ref={panelRef}>
       <div className="memory-manager__heading">
@@ -90,6 +112,19 @@ export default function MemoryManager({ mode, memory, onChanged, onClose }) {
           <textarea id="memory-caption" value={caption} onChange={(event) => setCaption(event.target.value)} maxLength={500} rows={4} placeholder="Un momento nuestro ♡" />
           {stage && <p className="memory-manager__stage" role="status"><span className="memory-manager__spinner" aria-hidden="true" />{stage}</p>}
           <button type="submit" disabled={busy || (mode === 'create' && !file)}>{busy ? 'Un momento...' : mode === 'edit' ? 'Guardar descripción' : 'Subir recuerdo'}</button>
+          {mode === 'edit' && <div className="memory-manager__delete">
+            {!confirmDelete ? (
+              <button type="button" onClick={() => setConfirmDelete(true)} disabled={busy}>Eliminar este recuerdo</button>
+            ) : (
+              <div className="memory-manager__confirm">
+                <p>¿Eliminar esta {memory.mediaType === 'video' ? 'video' : 'foto'} y su descripción? No se puede deshacer.</p>
+                <div>
+                  <button type="button" onClick={() => setConfirmDelete(false)} disabled={busy}>Cancelar</button>
+                  <button type="button" onClick={removeMemory} disabled={busy}>Sí, eliminar</button>
+                </div>
+              </div>
+            )}
+          </div>}
         </form>
       )}
       {message && <p className="memory-manager__message" role="status">{message}</p>}
