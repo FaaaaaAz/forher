@@ -510,11 +510,19 @@ a { color: inherit; }
 .plans-section h2 { max-width: 680px; margin: 14px 0; font-family: var(--font-display); font-size: clamp(44px, 5vw, 68px); font-weight: 400; letter-spacing: -.055em; line-height: 1.05; }
 .plans-section h2 em { color: var(--color-gold); font-weight: 400; }
 .plans-section__intro { margin: 0 0 34px; color: var(--color-muted); font-size: 15px; }
-.plans-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
-.plan-card { display: flex; flex-direction: column; min-height: 250px; padding: 28px; border: 1px solid var(--color-line); border-radius: 13px; background: rgba(243,207,101,.04); }
+.plans-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.plan-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--color-line); border-radius: 15px; background: rgba(243,207,101,.04); }
+.plan-card__image { display: flex; align-items: center; justify-content: center; min-height: 0; height: clamp(270px, 28vw, 370px); overflow: hidden; border-bottom: 1px solid var(--color-line); }
+.plan-card__image--cine { background: radial-gradient(circle, #e2e8dc, #c6d2c5); }
+.plan-card__image--comida { background: #f8f8f5; }
+.plan-card__image img { display: block; width: 100%; height: 100%; max-height: 100%; object-fit: contain; }
+.plan-card__image--cine img { flex: none; width: auto; height: 100%; max-width: 100%; }
+.plan-card__image--comida img { width: min(70%, 320px); height: auto; max-height: 80%; }
+.plan-card__content { display: flex; flex: 1; flex-direction: column; padding: 28px; }
 .plan-card__number { display: flex; justify-content: space-between; color: var(--color-gold); font-size: 11px; letter-spacing: .2em; }
 .plan-card__number span { font-size: 22px; }
-.plan-card h3 { margin: 33px 0 9px; font-family: var(--font-display); font-size: 28px; font-weight: 400; }
+.plan-card h3 { margin: 24px 0 5px; font-family: var(--font-display); font-size: clamp(26px, 3vw, 36px); font-weight: 400; }
+.plan-card__content > strong { margin-bottom: 16px; color: var(--color-gold); font-family: var(--font-display); font-size: 18px; font-style: italic; font-weight: 400; }
 .plan-card p { margin: 0; color: var(--color-muted); font-size: 13px; line-height: 1.6; }
 .plan-card__status { margin-top: auto; padding-top: 24px; color: var(--color-gold); font-size: 11px; letter-spacing: .08em; }
 .plans-section__ending { margin: 65px 0 0; color: var(--color-gold); font-family: var(--font-display); font-size: 20px; font-style: italic; text-align: center; }
@@ -527,6 +535,6 @@ a { color: inherit; }
   .album-choice__arrow { right: 28px; bottom: 28px; }
   .album-view__top { flex-wrap: wrap; }
   .plans-grid { grid-template-columns: 1fr; }
-  .plan-card { min-height: 205px; }
+  .plan-card__image { height: 290px; }
   .plans-section { padding-top: 75px; }
 }

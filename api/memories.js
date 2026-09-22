@@ -97,6 +97,9 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Acción no válida.' });
   } catch (error) {
     console.error('Memory API error:', error);
+    if (error?.code === '42501' && /memories/i.test(error.message || '')) {
+      return res.status(500).json({ error: 'Faltan permisos en Supabase. Ejecuta docs/enable_memory_editor.sql en SQL Editor.' });
+    }
     return res.status(500).json({ error: `No se pudo guardar el recuerdo: ${String(error?.message || 'error desconocido').slice(0, 180)}` });
   }
 }

@@ -39,6 +39,8 @@ alter table public.memories enable row level security;
 
 grant usage on schema public to anon;
 grant select on public.memories to anon;
+grant usage on schema public to service_role;
+grant select, insert, update on public.memories to service_role;
 
 create policy "Anyone can read published memories"
 on public.memories
@@ -47,7 +49,7 @@ to anon
 using (is_published = true);
 ```
 
-Este SQL concede **solo lectura de filas publicadas** al visitante sin sesión. No hay permisos de escritura desde la página. Si ya ejecutaste el SQL y vuelves a hacerlo, la línea `create policy` dará un error de nombre repetido: ejecútala solo una vez. [Supabase: RLS y permisos](https://supabase.com/docs/guides/api/securing-your-api).
+Este SQL concede **solo lectura de filas publicadas** al visitante sin sesión. La escritura de `service_role` se usa únicamente desde la función protegida de Vercel. Si ya ejecutaste el SQL y vuelves a hacerlo, la línea `create policy` dará un error de nombre repetido: ejecútala solo una vez. [Supabase: RLS y permisos](https://supabase.com/docs/guides/api/securing-your-api).
 
 ## 3. Crear el bucket y subir las imágenes
 
@@ -110,5 +112,7 @@ Para activar la escritura en Vercel, abre **Project → Settings → Environment
 2. `SUPABASE_SERVICE_ROLE_KEY`: la **secret key** o la clave `service_role` de **Supabase → Settings → API Keys**. Esta clave solo se usa en `api/memories.js`, que corre en Vercel. Nunca la pongas en una variable `VITE_`, en el repositorio o en una página.
 
 Después haz **Redeploy**. El valor de `VITE_SUPABASE_URL` ya configurado también debe estar disponible para la función del servidor. Puedes cambiar el código en Vercel cuando quieras; al hacerlo, los dispositivos tendrán que introducir el nuevo.
+
+**Permiso de la tabla:** en **Supabase → SQL Editor → New query**, ejecuta el contenido de [`docs/enable_memory_editor.sql`](enable_memory_editor.sql). El proyecto creó `memories` con lectura anónima, pero la función del servidor también necesita `SELECT`, `INSERT` y `UPDATE` para `service_role`. La instrucción no da permisos de escritura a visitantes y se puede ejecutar de nuevo sin problema. Si aparece `permission denied for table memories`, este paso aún falta. [Supabase: grants y RLS](https://supabase.com/docs/guides/api/securing-your-api).
 
 La web envía el archivo al bucket `our-memories` mediante un enlace temporal de subida y agrega una fila publicada a `memories`. Las descripciones se guardan en `caption`; al editar una de las 33 fotos anteriores se crea su fila si aún no existía. No hace falta ejecutar `seed_memories.sql` para esta función. Se aceptan JPG, PNG, WebP, MP4, WebM y MOV de hasta 45 MB; el límite real puede ser menor según los ajustes del bucket y del proyecto de Supabase. Durante la subida se muestra el paso actual o un error concreto.
