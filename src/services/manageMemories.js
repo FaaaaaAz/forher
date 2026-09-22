@@ -1,8 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { publishableKey, supabaseUrl } from './supabase.js';
 
-export const MEMORY_CODE_KEY = 'fabian-grace-memory-code';
-
 export async function memoryRequest(code, body) {
   const response = await fetch('/api/memories', {
     method: 'POST',

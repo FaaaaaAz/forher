@@ -23,6 +23,8 @@ test('el contador usa horas, minutos y segundos de Bolivia', () => {
 
 test('cambia la decoración de flores a Halloween en octubre', () => {
   assert.equal(getSeason({ month: 9, day: 21 }).id, 'yellow-flowers');
+  assert.equal(getSeason({ month: 9, day: 21 }).greeting, 'Feliz Día del Amor');
   assert.equal(getSeason({ month: 10, day: 1 }).id, 'halloween');
+  assert.equal(getSeason({ month: 10, day: 1 }).greeting, 'Feliz Halloween');
   assert.equal(getSeason({ month: 11, day: 1 }).id, 'spring');
 });

@@ -5,21 +5,22 @@ export function getSeason(today) {
     return {
       id: 'yellow-flowers',
       label: day === 21 ? 'Día del Amor' : 'Días de flores',
+      greeting: day === 21 ? 'Feliz Día del Amor' : 'Flores para ti',
       motif: 'flower',
       message: day === 21 ? 'Hoy el jardín se viste de flores para ti.' : 'Las flores siguen creciendo para ti.',
     };
   }
   if (month === 10) {
-    return { id: 'halloween', label: 'Halloween contigo', motif: 'pumpkin', message: 'Hasta las noches más mágicas son mejores contigo.' };
+    return { id: 'halloween', label: 'Halloween contigo', greeting: 'Feliz Halloween', motif: 'pumpkin', message: 'Hasta las noches más mágicas son mejores contigo.' };
   }
   if (month === 12 || month <= 2) {
-    return { id: 'summer', label: 'Verano juntos', motif: 'sun', message: 'Un poquito de sol para nuestros recuerdos.' };
+    return { id: 'summer', label: 'Verano juntos', greeting: 'Un verano juntos', motif: 'sun', message: 'Un poquito de sol para nuestros recuerdos.' };
   }
   if (month >= 3 && month <= 5) {
-    return { id: 'autumn', label: 'Otoño juntos', motif: 'leaf', message: 'Cada estación tiene algo nuestro.' };
+    return { id: 'autumn', label: 'Otoño juntos', greeting: 'Nuestro otoño', motif: 'leaf', message: 'Cada estación tiene algo nuestro.' };
   }
   if (month >= 6 && month <= 8) {
-    return { id: 'winter', label: 'Invierno juntos', motif: 'spark', message: 'También hay luz en los días fríos.' };
+    return { id: 'winter', label: 'Invierno juntos', greeting: 'Un invierno contigo', motif: 'spark', message: 'También hay luz en los días fríos.' };
   }
-  return { id: 'spring', label: 'Primavera juntos', motif: 'flower', message: 'Todo vuelve a florecer contigo.' };
+  return { id: 'spring', label: 'Primavera juntos', greeting: 'Primavera juntos', motif: 'flower', message: 'Todo vuelve a florecer contigo.' };
 }

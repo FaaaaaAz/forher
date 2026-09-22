@@ -170,7 +170,7 @@ a { color: inherit; }
 .text-link span { color: var(--color-gold); font-size: 18px; }
 .bloom-intro__art { position: relative; display: grid; place-items: center; min-height: 490px; }
 .bloom-intro__art-ring { position: absolute; width: min(35vw, 420px); aspect-ratio: 1; border: 1px solid rgba(225, 215, 171, 0.12); border-radius: 50%; box-shadow: inset 0 0 85px rgba(125, 145, 100, 0.045), 0 0 0 42px rgba(214, 203, 159, 0.012); }
-.bloom-intro__art-caption { position: absolute; bottom: 14px; color: #7d887b; font-size: 9px; font-weight: 600; letter-spacing: 0.24em; }
+.bloom-intro__art-caption { position: absolute; bottom: 14px; color: var(--color-gold); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-align: center; text-transform: uppercase; }
 .bloom-intro__bottom { display: flex; justify-content: center; align-items: center; gap: 14px; margin: 0; color: #818d80; font-size: 9px; font-weight: 600; letter-spacing: 0.23em; }
 .bloom-intro__bottom span { color: var(--color-gold); font-size: 17px; }
 
@@ -254,6 +254,8 @@ a { color: inherit; }
 .welcome__season span { font-size: 16px; }
 .bloom-intro__topright { display: flex; align-items: center; gap: 28px; }
 .season-label { color: var(--color-gold); font-size: 10px; letter-spacing: 0.08em; }
+.story-logout { padding: 8px 11px; border: 1px solid var(--color-line); border-radius: 100px; background: rgba(243,207,101,.04); color: var(--color-muted); cursor: pointer; font-size: 11px; white-space: nowrap; transition: border-color .2s, color .2s, background .2s; }
+.story-logout:hover { border-color: var(--color-gold); background: rgba(243,207,101,.1); color: var(--color-cream); }
 
 .together { position: relative; padding: 110px clamp(24px, 6vw, 88px); border-top: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); background: linear-gradient(145deg, rgba(161, 184, 141, 0.05), rgba(222, 197, 137, 0.025)); }
 .together__inner { max-width: 1100px; margin: 0 auto; }

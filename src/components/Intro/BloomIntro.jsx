@@ -1,11 +1,11 @@
 import Seedling from '../Garden/Seedling.jsx';
 
-export default function BloomIntro({ season }) {
+export default function BloomIntro({ season, onLogout }) {
   return (
     <section className="bloom-intro" aria-labelledby="bloom-title">
       <div className="bloom-intro__topline">
         <span className="wordmark"><span className="wordmark__symbol" aria-hidden="true">✿</span> FABIAN &amp; GRACE</span>
-        <span className="season-label">{season.label}</span>
+        <div className="bloom-intro__topright"><span className="season-label">{season.label}</span><button className="story-logout" type="button" onClick={onLogout}>Cerrar sesión</button></div>
       </div>
 
       <div className="bloom-intro__content">
@@ -18,7 +18,7 @@ export default function BloomIntro({ season }) {
         <div className="bloom-intro__art">
           <div className="bloom-intro__art-ring" aria-hidden="true" />
           <Seedling />
-          <span className="bloom-intro__art-caption">PARA SEGUIR FLORECIENDO JUNTOS</span>
+          <span className="bloom-intro__art-caption">{season.greeting}</span>
         </div>
       </div>
 

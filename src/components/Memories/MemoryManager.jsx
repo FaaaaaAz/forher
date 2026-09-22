@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { MEMORY_CODE_KEY, memoryRequest, uploadMemoryFile } from '../../services/manageMemories.js';
+import { MEMORY_CODE_KEY } from '../../data/storageKeys.js';
+import { memoryRequest, uploadMemoryFile } from '../../services/manageMemories.js';
 
 export default function MemoryManager({ mode, memory, onChanged, onClose }) {
   const panelRef = useRef(null);
