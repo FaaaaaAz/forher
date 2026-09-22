@@ -14,7 +14,6 @@ export default function BloomIntro({ season }) {
           <h1 id="bloom-title">Lo bonito es<br /><em>vivirlo contigo.</em></h1>
           <p className="bloom-intro__description">Este rincón cambia con nosotros. {season.id === 'yellow-flowers' ? 'Hoy está lleno de flores, corazones y recuerdos.' : season.message} Mañana tendrá nuevas páginas que escribir.</p>
           <p className="couple-signature couple-signature--story">Fabian <span>&amp;</span> Grace</p>
-          <a className="text-link" href="#garden">Explorar la historia <span aria-hidden="true">↓</span></a>
         </div>
         <div className="bloom-intro__art">
           <div className="bloom-intro__art-ring" aria-hidden="true" />
