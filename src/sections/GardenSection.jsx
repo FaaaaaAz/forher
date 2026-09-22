@@ -4,8 +4,8 @@ import { getDetailPhotos, uploadDetailPhoto } from '../services/detailPhotos.js'
 import { memoryUrl } from '../services/supabase.js';
 
 const cards = [
-  { slot: 'gifts', title: 'Tus regalos', alt: 'Los regalos para Grace', symbol: '♡' },
-  { slot: 'flowers', title: 'Tus flores', alt: 'Las flores para Grace', symbol: '✿' },
+  { slot: 'gifts', alt: 'Los regalos para Grace', symbol: '♡' },
+  { slot: 'flowers', alt: 'Las flores para Grace', symbol: '✿' },
 ];
 
 function DetailCard({ card, path, ready, onUploaded }) {
@@ -39,7 +39,6 @@ function DetailCard({ card, path, ready, onUploaded }) {
   return (
     <figure className={`detail-card${path ? ' detail-card--filled' : ''}`}>
       {path ? <img src={memoryUrl(path)} alt={card.alt} loading="lazy" /> : <div className="detail-card__placeholder" aria-hidden="true"><span>{card.symbol}</span></div>}
-      <figcaption><span>{card.title}</span>{path && <span className="detail-card__heart" aria-hidden="true">♡</span>}</figcaption>
       {!path && ready && !editing && <button className="detail-card__add" type="button" onClick={() => setEditing(true)}>Subir foto de {card.slot === 'gifts' ? 'los regalos' : 'las flores'}</button>}
       {!path && ready && editing && <form className="detail-card__form" onSubmit={submit}>
         <label htmlFor={`detail-file-${card.slot}`}>Elige la foto</label>

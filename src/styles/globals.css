@@ -438,14 +438,12 @@ a { color: inherit; }
 .garden-section__cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 3vw, 28px); }
 .garden-section__status { margin: 0 0 18px; color: var(--color-muted); font-size: 13px; }
 .garden-section__status button { margin-left: 10px; border: 0; background: transparent; color: var(--color-gold); cursor: pointer; text-decoration: underline; }
-.detail-card { min-width: 0; margin: 0; padding: 12px 12px 21px; border: 1px solid var(--color-line); border-radius: 17px; background: linear-gradient(155deg, rgba(243,207,101,.065), rgba(255,255,255,.012)); }
+.detail-card { min-width: 0; margin: 0; padding: 12px; border: 1px solid var(--color-line); border-radius: 17px; background: linear-gradient(155deg, rgba(243,207,101,.065), rgba(255,255,255,.012)); }
 .detail-card > img, .detail-card__placeholder { display: block; width: 100%; height: clamp(260px, 32vw, 390px); border-radius: 10px; }
 .detail-card > img { object-fit: cover; }
 .detail-card__placeholder { display: grid; place-items: center; border: 1px dashed rgba(243,207,101,.22); background: radial-gradient(circle at 50% 42%, rgba(243,207,101,.11), transparent 58%), #18221c; }
 .detail-card__placeholder span { color: var(--color-gold); font-size: clamp(70px, 11vw, 115px); line-height: 1; animation: flower-sway 6s ease-in-out infinite; }
-.detail-card figcaption { display: flex; justify-content: space-between; align-items: center; margin: 18px 6px 4px; color: var(--color-cream); font-family: var(--font-display); font-size: clamp(25px, 3vw, 34px); }
-.detail-card__heart { color: var(--color-gold); }
-.detail-card__add { margin: 12px 6px 0; padding: 10px 16px; border: 1px solid var(--color-gold); border-radius: 100px; background: rgba(243,207,101,.09); color: var(--color-gold); cursor: pointer; font-size: 12px; font-weight: 600; }
+.detail-card__add { margin: 16px 6px 8px; padding: 10px 16px; border: 1px solid var(--color-gold); border-radius: 100px; background: rgba(243,207,101,.09); color: var(--color-gold); cursor: pointer; font-size: 12px; font-weight: 600; }
 .detail-card__add:hover { background: rgba(243,207,101,.2); }
 .detail-card__form { display: flex; flex-direction: column; gap: 9px; padding: 12px 6px 0; }
 .detail-card__form label { color: var(--color-muted); font-size: 12px; }
