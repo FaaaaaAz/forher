@@ -3,7 +3,6 @@ import { MEMORY_CODE_KEY, memoryRequest, uploadMemoryFile } from '../../services
 
 export default function MemoryManager({ mode, memory, onChanged, onClose }) {
   const panelRef = useRef(null);
-  const formRef = useRef(null);
   const [code, setCode] = useState(() => localStorage.getItem(MEMORY_CODE_KEY) || '');
   const [unlocked, setUnlocked] = useState(false);
   const [file, setFile] = useState(null);
@@ -50,13 +49,10 @@ export default function MemoryManager({ mode, memory, onChanged, onClose }) {
         const path = await uploadMemoryFile(code, file, setStage);
         setStage('Guardando el recuerdo...');
         await memoryRequest(code, { action: 'create', path, caption });
-        setFile(null);
-        setCaption('');
-        formRef.current?.reset();
       }
       setStage('Actualizando el álbum...');
       await onChanged();
-      setMessage(mode === 'edit' ? 'Descripción guardada ♡' : 'Recuerdo añadido ♡');
+      onClose();
     } catch (error) {
       setMessage(error.message || 'No se pudo guardar. Inténtalo de nuevo.');
     } finally {
@@ -99,7 +95,7 @@ export default function MemoryManager({ mode, memory, onChanged, onClose }) {
           <p>Quedará guardado en este dispositivo.</p>
         </form>
       ) : (
-        <form className="memory-manager__form" ref={formRef} onSubmit={save}>
+        <form className="memory-manager__form" onSubmit={save}>
           {mode === 'edit' ? (
             <div className="memory-manager__selected">
               {memory.mediaType === 'video' ? <video src={memory.imageUrl} muted playsInline preload="metadata" /> : <img src={memory.imageUrl} alt={memory.alt} />}
