@@ -4,6 +4,7 @@ import StarField from './components/Intro/StarField.jsx';
 import StoryGate from './components/Intro/StoryGate.jsx';
 import SeasonalDecor from './components/Intro/SeasonalDecor.jsx';
 import TogetherCounter from './components/Intro/TogetherCounter.jsx';
+import BackgroundMusic from './components/Audio/BackgroundMusic.jsx';
 import IntroSection from './sections/IntroSection.jsx';
 import GardenSection from './sections/GardenSection.jsx';
 import MemoriesSection from './sections/MemoriesSection.jsx';
@@ -62,6 +63,7 @@ export default function App() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
             >
+              <BackgroundMusic />
               <IntroSection isOpen season={season} onLogout={logoutStory} />
               <TogetherCounter today={today} now={now} />
               <div className="chapters" aria-label="Nuestra historia">
