@@ -84,7 +84,7 @@ export default function MemoriesPreview() {
 
       <dialog className="memory-dialog" ref={dialogRef} onClose={() => setSelected(null)} onClick={(event) => { if (event.target === dialogRef.current) dialogRef.current.close(); }} aria-label="Recuerdo ampliado">
         {selected && <div className="memory-dialog__content">
-          <button className="memory-dialog__close" type="button" onClick={() => dialogRef.current?.close()} aria-label="Cerrar recuerdo">×</button>
+          <button className="memory-dialog__close" type="button" onClick={() => dialogRef.current?.close()} aria-label="Cerrar recuerdo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" /></svg></button>
           {selected.mediaType === 'video' ? <video src={selected.imageUrl} controls autoPlay playsInline /> : <img src={selected.imageUrl} alt={selected.alt} />}
           {selected.caption && <p>{selected.caption}</p>}
         </div>}

@@ -12,7 +12,7 @@ export default function LetterPreview() {
       </button>
       <dialog className="letter-dialog" ref={dialogRef} onClick={(event) => { if (event.target === dialogRef.current) dialogRef.current.close(); }} aria-labelledby="letter-paper-title">
         <div className="letter-paper">
-          <button type="button" className="letter-paper__close" onClick={() => dialogRef.current?.close()} aria-label="Cerrar carta">×</button>
+          <button type="button" className="letter-paper__close" onClick={() => dialogRef.current?.close()} aria-label="Cerrar carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" /></svg></button>
           <span className="letter-paper__flower" aria-hidden="true">✿</span>
           <p className="letter-paper__date">UNA CARTA PARA TI</p>
           <h3 id="letter-paper-title">Bueno mi amorcito:</h3>

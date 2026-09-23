@@ -87,7 +87,7 @@ export default function MemoryManager({ mode, memory, onChanged, onClose }) {
     <div className="memory-manager" ref={panelRef}>
       <div className="memory-manager__heading">
         <div><p className="chapter__eyebrow">NUESTRO ÁLBUM</p><h3>{mode === 'edit' ? 'Editar este recuerdo' : 'Añadir un recuerdo'}</h3></div>
-        <button type="button" onClick={onClose} aria-label="Cerrar formulario">×</button>
+        <button type="button" onClick={onClose} aria-label="Cerrar formulario"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" /></svg></button>
       </div>
       {!unlocked ? (
         <form className="memory-manager__form" onSubmit={unlock}>

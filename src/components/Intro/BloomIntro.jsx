@@ -5,7 +5,7 @@ export default function BloomIntro({ season, onLogout }) {
     <section className="bloom-intro" aria-labelledby="bloom-title">
       <div className="bloom-intro__topline">
         <span className="wordmark"><span className="wordmark__symbol" aria-hidden="true">✿</span> FABIAN &amp; GRACE</span>
-        <div className="bloom-intro__topright"><span className="season-label">{season.label}</span><button className="story-logout" type="button" onClick={onLogout}>Cerrar sesión</button></div>
+        <div className="bloom-intro__topright"><button className="story-logout" type="button" onClick={onLogout}>Cerrar sesión</button></div>
       </div>
 
       <div className="bloom-intro__content">
