@@ -17,7 +17,9 @@ export default function BackgroundMusic() {
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
   const [volume, setVolume] = useState(() => {
-    const saved = Number(localStorage.getItem(VOLUME_KEY));
+    const stored = localStorage.getItem(VOLUME_KEY);
+    if (stored === null) return 0.45;
+    const saved = Number(stored);
     return Number.isFinite(saved) && saved >= 0 && saved <= 1 ? saved : 0.45;
   });
 
