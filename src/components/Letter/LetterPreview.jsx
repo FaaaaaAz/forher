@@ -52,7 +52,11 @@ export default function LetterPreview() {
       </div>
 
       <LetterDialog dialogRef={currentRef} titleId="current-letter-title" date="DOS AÑOS Y CINCO MESES" title="Mi amor:">
-        <p>Feliz 2 años y 5 meses, mi amor. Te amo mucho.</p>
+        <p>Mi amorcito, felices 2 años y 5 meses. Te amo demasiado, mi amor de mi vida. Gracias por todo, por cada detalle, por siempre estar conmigo y por amarme cada día más.</p>
+        <p>Sé que no fue un mes fácil para nosotros, que pasamos por muchas cosas y que estos últimos días fueron especialmente difíciles por todo lo que está pasando con tu familia. Pero quiero que sepas que pase lo que pase y al final de cada día, siempre estaré contigo y para ti, mi amor. Quiero decirte que te elijo cada día y que quiero seguir construyendo muchas cosas bonitas a tu lado.</p>
+        <p>Quiero ser siempre ese hombro en el que puedas apoyarte y desahogarte, ese abrazo que te abrigue, calme y te haga sentir segura, y ese beso en la frente acompañado de un “te amo” que te recuerde lo especial, amada y maravillosa que eres. Quiero que sepas que conmigo siempre puedes ser tú, que no tienes que guardarte nada y que tanto en los días bonitos como en los más difíciles, voy a querer acompañarte y estar a tu lado.</p>
+        <p>Te amo muchísimo, mi amor. Gracias por estos 2 años y 5 meses tan bonitos, por cada momento que hemos compartido, por todo lo que hemos aprendido juntos y por permitirme seguir formando parte de tu vida. Me siento muy afortunado de tenerte a mi lado y espero que nos queden muchísimos meses y años más para seguir amándonos, creciendo juntos y creando recuerdos que sean solo nuestros.</p>
+        <p>Te amo demasiado, Grace. Feliz 2 años y 5 meses, mi niña bonita.</p>
       </LetterDialog>
 
       <LetterDialog dialogRef={archiveRef} titleId="archived-letter-title" date="21 DE SEPTIEMBRE DE 2026" title="Bueno mi amorcito:">
