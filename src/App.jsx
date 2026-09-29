@@ -67,7 +67,7 @@ export default function App() {
               <IntroSection isOpen season={season} onLogout={logoutStory} />
               <TogetherCounter today={today} now={now} />
               <div className="chapters" aria-label="Nuestra historia">
-                <GardenSection />
+              <GardenSection today={today} />
                 <MemoriesSection />
                 <LetterSection />
                 <PlansSection />
