@@ -3,26 +3,6 @@
   50% { opacity: 0.72; transform: scale(1.2); }
 }
 
-@keyframes stem-grow {
-  from { transform: translateX(-50%) scaleY(0); }
-  to { transform: translateX(-50%) scaleY(1); }
-}
-
-@keyframes leaf-open-left {
-  from { opacity: 0; transform: rotate(-24deg) scale(0.2); }
-  to { opacity: 1; transform: rotate(-24deg) scale(1); }
-}
-
-@keyframes leaf-open-right {
-  from { opacity: 0; transform: rotate(24deg) scale(0.2); }
-  to { opacity: 1; transform: rotate(24deg) scale(1); }
-}
-
-@keyframes light-breathe {
-  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(0.95); }
-  50% { opacity: 0.75; transform: translateX(-50%) scale(1.05); }
-}
-
 @keyframes seasonal-drift {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg); }
   50% { transform: translate3d(8px, -15px, 0) rotate(9deg); }

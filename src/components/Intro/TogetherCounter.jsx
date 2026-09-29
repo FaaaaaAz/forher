@@ -17,7 +17,7 @@ export default function TogetherCounter({ today, now }) {
     <section className="together" aria-labelledby="together-title">
       <motion.div className="together__inner" initial={{ opacity: 0, y: 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.8 }}>
         <p className="eyebrow"><span className="eyebrow__line" /> DESDE EL 28 DE ABRIL DE 2024</p>
-        <h2 id="together-title">El tiempo contigo <em>florece.</em></h2>
+        <h2 id="together-title">El tiempo contigo <em>se vuelve historia.</em></h2>
         <div className="together__count" role="timer" aria-label="Tiempo juntos" aria-live="off">
           {units.map(({ value, label }) => (
             <div className="together__unit" key={label}>

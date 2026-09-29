@@ -27,7 +27,7 @@ export default function StoryGate({ onUnlock, onBack }) {
       <div className="story-gate__glow" aria-hidden="true" />
       <button className="story-gate__back" type="button" onClick={onBack}>← Volver</button>
       <div className="story-gate__card">
-        <div className="story-gate__flower" aria-hidden="true">✿</div>
+        <div className="story-gate__flower" aria-hidden="true">♡</div>
         <p className="story-gate__eyebrow">UN RINCÓN PARA FABIAN Y GRACE</p>
         <h1 id="gate-title">Nuestra historia<br /><em>tiene una llave.</em></h1>
         <p className="story-gate__intro">Escribe los seis números que abren este lugar.</p>

@@ -21,10 +21,10 @@ test('el contador usa horas, minutos y segundos de Bolivia', () => {
   assert.deepEqual(getBoliviaClock(new Date('2026-09-21T05:23:45Z')), { hours: 1, minutes: 23, seconds: 45 });
 });
 
-test('cambia la decoración de flores a Halloween en octubre', () => {
-  assert.equal(getSeason({ month: 9, day: 21 }).id, 'yellow-flowers');
-  assert.equal(getSeason({ month: 9, day: 21 }).greeting, 'Feliz Día del Amor');
+test('usa el tema de amor y cambia automáticamente a Halloween en octubre', () => {
+  assert.equal(getSeason({ year: 2026, month: 9, day: 29 }).id, 'love');
+  assert.equal(getSeason({ year: 2026, month: 9, day: 29 }).label, '2 años y 5 meses juntos');
   assert.equal(getSeason({ month: 10, day: 1 }).id, 'halloween');
   assert.equal(getSeason({ month: 10, day: 1 }).greeting, 'Feliz Halloween');
-  assert.equal(getSeason({ month: 11, day: 1 }).id, 'spring');
+  assert.equal(getSeason({ year: 2026, month: 11, day: 1 }).id, 'love');
 });
