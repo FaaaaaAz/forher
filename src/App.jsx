@@ -11,15 +11,12 @@ import GardenSection from './sections/GardenSection.jsx';
 import MemoriesSection from './sections/MemoriesSection.jsx';
 import LetterSection from './sections/LetterSection.jsx';
 import PlansSection from './sections/PlansSection.jsx';
-import { MEMORY_CODE_KEY, STORY_REMEMBER_KEY } from './data/storageKeys.js';
+import { clearStorySession, hasRememberedSession, saveStorySession, SESSION_EXPIRED_EVENT } from './services/session.js';
 import { getBoliviaDate } from './utils/dates.js';
 import { getSeason } from './utils/season.js';
 
 export default function App() {
-  const [isOpen, setIsOpen] = useState(() => {
-    try { return window.localStorage.getItem(STORY_REMEMBER_KEY) === 'yes'; }
-    catch { return false; }
-  });
+  const [isOpen, setIsOpen] = useState(hasRememberedSession);
   const [showGate, setShowGate] = useState(false);
   const [now, setNow] = useState(() => new Date());
   const today = getBoliviaDate(now);
@@ -30,22 +27,23 @@ export default function App() {
     return () => window.clearInterval(interval);
   }, []);
 
-  function unlockStory(remember) {
-    try {
-      if (remember) window.localStorage.setItem(STORY_REMEMBER_KEY, 'yes');
-      else window.localStorage.removeItem(STORY_REMEMBER_KEY);
-    } catch { /* El acceso sigue funcionando si el navegador bloquea el almacenamiento. */ }
+  // Si el servidor ya no reconoce la sesión, se pide la clave de seis dígitos una vez más.
+  useEffect(() => {
+    function expire() { logoutStory(true); }
+    window.addEventListener(SESSION_EXPIRED_EVENT, expire);
+    return () => window.removeEventListener(SESSION_EXPIRED_EVENT, expire);
+  }, []);
+
+  function unlockStory(token, remember) {
+    saveStorySession(token, remember);
     setIsOpen(true);
   }
 
-  function logoutStory() {
-    try {
-      window.localStorage.removeItem(STORY_REMEMBER_KEY);
-      window.localStorage.removeItem(MEMORY_CODE_KEY);
-    } catch { /* El botón sigue volviendo al inicio sin almacenamiento. */ }
+  function logoutStory(toGate = false) {
+    clearStorySession();
     window.history.replaceState(null, '', window.location.pathname + window.location.search);
     window.scrollTo(0, 0);
-    setShowGate(false);
+    setShowGate(toGate === true);
     setIsOpen(false);
   }
 

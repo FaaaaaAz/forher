@@ -280,17 +280,17 @@ input, textarea, select { font-size: 16px; }
 .memories-section__symbol { padding-bottom: 20px; color: var(--color-gold); font-family: var(--font-display); font-size: 48px; }
 .memory-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 16px; }
 .memory-card { min-width: 0; margin: 0; }
-.memory-card button { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid rgba(237, 222, 177, 0.14); border-radius: 12px; background: #1a221c; cursor: zoom-in; }
+.memory-card button { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 1px solid rgba(237, 222, 177, 0.14); border-radius: 12px; background: #21131a; cursor: zoom-in; }
 .memory-card img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; transition: transform 550ms ease, filter 550ms ease; }
 .memory-card button:hover img { transform: scale(1.05); filter: brightness(1.08); }
-.memory-card__view { position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center; width: 33px; height: 33px; border: 1px solid rgba(255,255,255,0.25); border-radius: 50%; background: rgba(11,18,16,0.7); color: white; font-size: 17px; backdrop-filter: blur(5px); }
+.memory-card__view { position: absolute; right: 12px; bottom: 12px; display: grid; place-items: center; width: 33px; height: 33px; border: 1px solid rgba(255,255,255,0.25); border-radius: 50%; background: rgba(21,12,18,0.7); color: white; font-size: 17px; backdrop-filter: blur(5px); }
 .memory-card figcaption { overflow: hidden; margin-top: 11px; color: #9ca79b; font-size: 10px; font-weight: 600; letter-spacing: 0.11em; text-overflow: ellipsis; white-space: nowrap; }
-.memory-dialog { max-width: none; max-height: none; width: 100vw; height: 100dvh; margin: 0; padding: 24px; border: 0; background: rgba(8, 12, 10, 0.95); color: var(--color-cream); }
+.memory-dialog { max-width: none; max-height: none; width: 100vw; height: 100dvh; margin: 0; padding: 24px; border: 0; background: rgba(14, 8, 12, 0.95); color: var(--color-cream); }
 .memory-dialog::backdrop { background: rgba(0,0,0,0.86); backdrop-filter: blur(10px); }
 .memory-dialog__content { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%; }
 .memory-dialog__content img { display: block; max-width: min(92vw, 1200px); max-height: calc(100dvh - 100px); width: auto; height: auto; object-fit: contain; border-radius: 5px; }
 .memory-dialog__content p { margin: 14px 0 0; color: var(--color-muted); font-size: 14px; }
-.memory-dialog__close { position: fixed; top: max(18px, env(safe-area-inset-top)); right: max(22px, env(safe-area-inset-right)); z-index: 1; display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 1px solid var(--color-line); border-radius: 50%; background: #222b24; color: white; cursor: pointer; line-height: 0; }
+.memory-dialog__close { position: fixed; top: max(18px, env(safe-area-inset-top)); right: max(22px, env(safe-area-inset-right)); z-index: 1; display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 1px solid var(--color-line); border-radius: 50%; background: #2a1821; color: white; cursor: pointer; line-height: 0; }
 .memory-dialog__close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 
 @media (max-width: 1000px) { .memory-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -501,7 +501,7 @@ input, textarea, select { font-size: 16px; }
 .garden-section h2, .letter-section h2 { margin: 12px 0 20px; font-family: var(--font-display); font-size: clamp(42px, 5vw, 68px); font-weight: 400; letter-spacing: -.055em; line-height: 1.05; }
 .garden-section h2 em, .letter-section h2 em { color: var(--color-gold); font-weight: 400; }
 .garden-section__copy > p:last-child, .letter-section > p:not(.chapter__eyebrow) { max-width: 500px; color: var(--color-muted); line-height: 1.7; }
-.garden-section__frame { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 340px; border: 1px solid rgba(220,143,160,.3); border-radius: 160px 160px 12px 12px; background: radial-gradient(circle at 50% 35%, rgba(220,143,160,.14), transparent 55%), #19221b; box-shadow: inset 0 0 0 8px rgba(220,143,160,.025); text-align: center; }
+.garden-section__frame { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 340px; border: 1px solid rgba(220,143,160,.3); border-radius: 160px 160px 12px 12px; background: radial-gradient(circle at 50% 35%, rgba(220,143,160,.14), transparent 55%), #21131a; box-shadow: inset 0 0 0 8px rgba(220,143,160,.025); text-align: center; }
 .garden-section__frame span { color: var(--color-gold); font-size: 110px; line-height: 1; animation: flower-sway 6s ease-in-out infinite; }
 .garden-section__frame p { margin: 25px 0 0; color: var(--color-muted); font-family: var(--font-display); font-size: 17px; font-style: italic; }
 .memory-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin: 0 0 32px; }
@@ -537,7 +537,7 @@ input, textarea, select { font-size: 16px; }
 .letter-section h2 { margin-bottom: 5px; }
 .letter-dialog { width: min(92vw, 680px); max-height: min(88dvh, 800px); padding: 0; border: 0; border-radius: 10px; background: transparent; color: #493c34; }
 .letter-dialog[open] { animation: letter-open .35s ease-out both; }
-.letter-dialog::backdrop { background: rgba(5,12,9,.85); backdrop-filter: blur(8px); }
+.letter-dialog::backdrop { background: rgba(12,6,10,.85); backdrop-filter: blur(8px); }
 .letter-paper { position: relative; padding: clamp(38px, 7vw, 70px); background: linear-gradient(135deg,#fffaf0,#f2e3ca); box-shadow: inset 0 0 0 1px rgba(115,76,49,.15); }
 .letter-paper__close { position: absolute; top: 16px; right: 18px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; background: transparent; color: #76594b; cursor: pointer; line-height: 0; }
 .letter-paper__close svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
@@ -596,7 +596,7 @@ input, textarea, select { font-size: 16px; }
 .story-gate__glow { position: absolute; top: 50%; left: 50%; width: min(80vw, 760px); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, rgba(220,143,160,.11), rgba(220,143,160,.025) 48%, transparent 72%); pointer-events: none; }
 .story-gate__back { position: absolute; z-index: 1; top: 34px; left: clamp(24px, 5vw, 80px); border: 0; background: transparent; color: var(--color-muted); cursor: pointer; font-size: 13px; }
 .story-gate__back:hover { color: var(--color-gold); }
-.story-gate__card { position: relative; width: min(100%, 580px); padding: clamp(26px, 6vw, 56px); border: 1px solid rgba(220,143,160,.25); border-radius: 24px; background: linear-gradient(150deg, rgba(32,45,37,.98), rgba(17,29,24,.98)); box-shadow: 0 35px 90px rgba(0,0,0,.27), 0 0 70px rgba(220,143,160,.045); text-align: center; }
+.story-gate__card { position: relative; width: min(100%, 580px); padding: clamp(26px, 6vw, 56px); border: 1px solid rgba(220,143,160,.25); border-radius: 24px; background: linear-gradient(150deg, rgba(46,25,35,.98), rgba(26,14,21,.98)); box-shadow: 0 35px 90px rgba(0,0,0,.27), 0 0 70px rgba(220,143,160,.045); text-align: center; }
 .story-gate__flower { margin-bottom: 14px; color: var(--color-gold); font-size: 40px; line-height: 1; animation: flower-appear .8s both ease-out, flower-sway 6s .8s ease-in-out infinite; }
 .story-gate__eyebrow { margin: 0; color: var(--color-gold); font-size: 10px; font-weight: 700; letter-spacing: .23em; }
 .story-gate h1 { margin: 17px 0 15px; font-family: var(--font-display); font-size: clamp(40px, 6vw, 64px); font-weight: 400; letter-spacing: -.055em; line-height: 1.04; }
@@ -792,7 +792,7 @@ input, textarea, select { font-size: 16px; }
 .plan-editor__actions button, .plan-dialog__choices button, .plan-dialog__complete button { padding: 11px 17px; border: 1px solid var(--color-gold); border-radius: 100px; background: var(--color-gold); color: #2a151e; cursor: pointer; font-weight: 700; }
 .plan-editor__actions button:last-child, .plan-dialog__complete button:last-child { background: transparent; color: var(--color-muted); border-color: var(--color-line); }
 .plan-editor__stage { color: var(--color-gold); }.plan-editor__error, .plan-dialog__complete p { color: #efada5; }
-.plan-dialog { max-width: none; max-height: none; width: 100vw; height: 100dvh; padding: 20px; border: 0; background: rgba(8,13,10,.82); color: var(--color-cream); }
+.plan-dialog { max-width: none; max-height: none; width: 100vw; height: 100dvh; padding: 20px; border: 0; background: rgba(14,8,12,.82); color: var(--color-cream); }
 .plan-dialog::backdrop { background: rgba(0,0,0,.72); backdrop-filter: blur(8px); }
 .plan-dialog__card { position: relative; width: min(100%, 650px); max-height: calc(100dvh - 40px); margin: auto; padding: clamp(27px, 5vw, 48px); overflow-y: auto; border: 1px solid var(--color-line); border-radius: 22px; background: #21131a; box-shadow: 0 30px 100px rgba(0,0,0,.4); }
 .plan-dialog__close { position: absolute; top: 18px; right: 18px; display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid var(--color-line); border-radius: 50%; background: transparent; color: var(--color-cream); cursor: pointer; line-height: 0; }
@@ -806,11 +806,11 @@ input, textarea, select { font-size: 16px; }
 .music-player { position: fixed; z-index: 20; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 8px; filter: drop-shadow(0 12px 30px rgba(0,0,0,.3)); }
 .music-player button { display: grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%; background: rgba(220,143,160,.12); color: var(--color-gold); cursor: pointer; line-height: 0; }
 .music-player svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.music-player .music-player__toggle { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(220,143,160,.35); background: rgba(16,27,24,.94); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+.music-player .music-player__toggle { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(220,143,160,.35); background: rgba(33,19,26,.94); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
 .music-player__toggle > svg:first-child { width: 19px; height: 19px; }
 .music-player__toggle .music-player__chevron { position: absolute; top: 5px; right: 5px; width: 10px; height: 10px; }
 .music-player .music-player__fill-icon { fill: currentColor; stroke: none; }
-.music-player__panel { display: grid; grid-template-columns: auto auto; align-items: center; gap: 9px 13px; padding: 11px 13px; border: 1px solid rgba(220,143,160,.3); border-radius: 18px; background: rgba(16,27,24,.94); backdrop-filter: blur(12px); animation: music-panel-in .2s ease-out both; }
+.music-player__panel { display: grid; grid-template-columns: auto auto; align-items: center; gap: 9px 13px; padding: 11px 13px; border: 1px solid rgba(220,143,160,.3); border-radius: 18px; background: rgba(33,19,26,.94); backdrop-filter: blur(12px); animation: music-panel-in .2s ease-out both; }
 .music-player__track { grid-column: 1 / -1; max-width: 180px; overflow: hidden; color: var(--color-cream); font-family: var(--font-display); font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
 .music-player__buttons { display: flex; gap: 6px; }
 .music-player__buttons button { font-size: 20px; }
@@ -836,6 +836,8 @@ input, textarea, select { font-size: 16px; }
   .plan-card__image { height: 290px; }
   .plans-section { padding-top: 75px; }
 }
+
+.plan-dialog__question { color: var(--color-cream); font-size: 14px; }
 
 /* Textos largos escritos por la usuaria (enlaces, palabras sin espacios) no deben ensanchar la página. */
 .memory-card figcaption, .plan-card h3, .plan-card__content > strong, .plan-card p, .plan-dialog__card, .memory-dialog__content p { overflow-wrap: anywhere; }

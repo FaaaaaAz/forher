@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
-import { timingSafeEqual, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { bundledMemories } from '../src/data/bundledMemories.js';
+import { hasAccess } from './_auth.js';
 
 const bucket = 'our-memories';
 const allowedExtensions = new Map([
@@ -22,14 +23,6 @@ async function detailPhotos(supabase) {
   return details;
 }
 
-function hasAccess(value) {
-  const expected = process.env.MEMORY_ADMIN_CODE;
-  if (!expected || expected.length < 12 || typeof value !== 'string') return false;
-  const given = Buffer.from(value);
-  const secret = Buffer.from(expected);
-  return given.length === secret.length && timingSafeEqual(given, secret);
-}
-
 function client() {
   const url = process.env.VITE_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -47,7 +40,7 @@ export default async function handler(req, res) {
   if (!process.env.MEMORY_ADMIN_CODE || !process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.VITE_SUPABASE_URL) {
     return res.status(503).json({ error: 'Falta activar la administración de recuerdos en Vercel.' });
   }
-  if (req.method === 'POST' && !hasAccess(req.headers['x-memory-code'])) return res.status(401).json({ error: 'Código incorrecto.' });
+  if (req.method === 'POST' && !hasAccess(req.headers)) return res.status(401).json({ error: 'Tu sesión expiró. Vuelve a entrar con nuestra clave.' });
 
   try {
     const { action } = req.body ?? {};

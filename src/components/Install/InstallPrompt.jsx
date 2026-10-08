@@ -84,9 +84,9 @@ export default function InstallPrompt({ visible }) {
           <span className="install-prompt__flower" aria-hidden="true">✿</span>
           <div className="install-prompt__copy">
             <strong>Llévanos en tu pantalla de inicio</strong>
-            {mode === 'prompt' && <p>Abre nuestra historia como una app, sin barra del navegador.</p>}
-            {mode === 'safari' && <p>Toca Compartir <ShareIcon /> (o ••• y luego Compartir) y elige “Agregar a pantalla de inicio”.</p>}
-            {mode === 'ios-other' && <p>Toca Compartir <ShareIcon /> en la barra de direcciones y elige “Agregar a pantalla de inicio”.</p>}
+            {mode === 'prompt' && <p>Abre nuestra historia como una app llamada “US”, sin barra del navegador.</p>}
+            {mode === 'safari' && <p>Toca Compartir <ShareIcon /> (o ••• y luego Compartir) y elige “Agregar a pantalla de inicio”. Se llamará “US” ♡</p>}
+            {mode === 'ios-other' && <p>Toca Compartir <ShareIcon /> en la barra de direcciones y elige “Agregar a pantalla de inicio”. Se llamará “US” ♡</p>}
             {mode === 'prompt' && <button className="install-prompt__install" type="button" onClick={install}>Instalar app</button>}
           </div>
           <button className="install-prompt__close" type="button" onClick={dismiss} aria-label="Cerrar aviso"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" /></svg></button>

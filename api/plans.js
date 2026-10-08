@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
-import { timingSafeEqual, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
+import { hasAccess } from './_auth.js';
 
 const bucket = 'our-memories';
 const dataPath = 'plans/plans.json';
@@ -14,14 +15,6 @@ function client() {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) throw new Error('Falta configurar Supabase en Vercel.');
   return createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
-}
-
-function hasAccess(value) {
-  const expected = process.env.MEMORY_ADMIN_CODE;
-  if (!expected || expected.length < 12 || typeof value !== 'string') return false;
-  const given = Buffer.from(value);
-  const secret = Buffer.from(expected);
-  return given.length === secret.length && timingSafeEqual(given, secret);
 }
 
 async function readPlans(supabase) {
@@ -46,7 +39,7 @@ function text(value, max = 160) {
 export default async function handler(req, res) {
   if (req.method !== 'GET' && req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido.' });
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY || !process.env.VITE_SUPABASE_URL) return res.status(503).json({ error: 'Falta configurar Supabase en Vercel.' });
-  if (req.method === 'POST' && !hasAccess(req.headers['x-memory-code'])) return res.status(401).json({ error: 'Código incorrecto.' });
+  if (req.method === 'POST' && !hasAccess(req.headers)) return res.status(401).json({ error: 'Tu sesión expiró. Vuelve a entrar con nuestra clave.' });
 
   try {
     const supabase = client();

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import noHeyBee from '../../assets/audio/noheybeeAudioor.mp3';
 import upRoses from '../../assets/audio/uprosesAudiohs.mp3';
+import { prepareMusicOffline } from '../../pwa/offline.js';
 
 const tracks = [
   { src: upRoses, name: 'Coming Up Roses' },
@@ -34,6 +35,8 @@ export default function BackgroundMusic() {
     const saved = Number(stored);
     return Number.isFinite(saved) && saved >= 0 && saved <= 1 ? saved : 0.45;
   });
+
+  useEffect(() => { prepareMusicOffline(tracks.map((item) => item.src)); }, []);
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = volume;

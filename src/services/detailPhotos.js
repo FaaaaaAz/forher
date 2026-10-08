@@ -32,13 +32,13 @@ async function preparePhoto(file) {
   }
 }
 
-export async function uploadDetailPhoto(code, slot, file, onStage) {
+export async function uploadDetailPhoto(slot, file, onStage) {
   onStage('Preparando la foto...');
   const photo = await preparePhoto(file);
   const contentType = photo.type || ({ jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[photo.name.split('.').pop().toLowerCase()]);
   const [{ memoryRequest }, { createClient }] = await Promise.all([import('./manageMemories.js'), import('@supabase/supabase-js')]);
   onStage('Preparando la subida...');
-  const { path, token } = await memoryRequest(code, { action: 'detail-upload-url', slot, contentType });
+  const { path, token } = await memoryRequest({ action: 'detail-upload-url', slot, contentType });
   onStage('Subiendo la foto...');
   const supabase = createClient(supabaseUrl, publishableKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const { error } = await supabase.storage.from('our-memories').uploadToSignedUrl(path, token, photo, { contentType });

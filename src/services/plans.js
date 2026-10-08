@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { storyPost } from './session.js';
 import { publishableKey, supabaseUrl } from './supabase.js';
 
 export async function getPlans() {
@@ -8,21 +9,18 @@ export async function getPlans() {
   return result.plans;
 }
 
-export async function planRequest(code, body) {
-  const response = await fetch('/api/plans', { method: 'POST', headers: { 'content-type': 'application/json', 'x-memory-code': code }, body: JSON.stringify(body) });
-  const result = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(result.error || 'No se pudo guardar la cita.');
-  return result;
+export function planRequest(body) {
+  return storyPost('/api/plans', body, 'No se pudo guardar la cita.');
 }
 
-export async function uploadPlanImage(code, file, onStage) {
+export async function uploadPlanImage(file, onStage) {
   if (!file) return null;
   if (file.size > 15 * 1024 * 1024) throw new Error('La imagen debe pesar menos de 15 MB.');
   const extension = file.name.split('.').pop().toLowerCase();
   const contentType = file.type || ({ jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[extension]);
   if (!['image/jpeg', 'image/png', 'image/webp'].includes(contentType)) throw new Error('Usa una imagen JPG, PNG o WebP.');
   onStage('Preparando la imagen...');
-  const { path, token } = await planRequest(code, { action: 'image-upload-url', contentType });
+  const { path, token } = await planRequest({ action: 'image-upload-url', contentType });
   onStage('Subiendo la imagen...');
   const supabase = createClient(supabaseUrl, publishableKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const { error } = await supabase.storage.from('our-memories').uploadToSignedUrl(path, token, file, { contentType });

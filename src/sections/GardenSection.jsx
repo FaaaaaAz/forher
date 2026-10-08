@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { MEMORY_CODE_KEY } from '../data/storageKeys.js';
 import { getDetailPhotos, uploadDetailPhoto } from '../services/detailPhotos.js';
-import { memoryUrl } from '../services/supabase.js';
+import { memoryImageUrl } from '../services/supabase.js';
+import { prepareImagesOffline } from '../pwa/offline.js';
+import MemoryImage from '../components/Media/MemoryImage.jsx';
 
 const loveDay = {
   id: 'love-day-2026', title: 'Día del Amor', date: '21/09', year: 2026, icon: '♡',
@@ -18,21 +19,17 @@ const festivals = [loveDay];
 function DetailCard({ card, path, ready, onUploaded }) {
   const [editing, setEditing] = useState(false);
   const [file, setFile] = useState(null);
-  const [code, setCode] = useState(() => {
-    try { return localStorage.getItem(MEMORY_CODE_KEY) || ''; } catch { return ''; }
-  });
   const [busy, setBusy] = useState(false);
   const [stage, setStage] = useState('');
   const [error, setError] = useState('');
 
   async function submit(event) {
     event.preventDefault();
-    if (!file || !code) return;
+    if (!file) return;
     setBusy(true);
     setError('');
     try {
-      const photo = await uploadDetailPhoto(code, card.slot, file, setStage);
-      try { localStorage.setItem(MEMORY_CODE_KEY, code); } catch { /* La subida continúa sin almacenamiento. */ }
+      const photo = await uploadDetailPhoto(card.slot, file, setStage);
       onUploaded(card.slot, photo.path);
       setEditing(false);
     } catch (uploadError) {
@@ -45,17 +42,15 @@ function DetailCard({ card, path, ready, onUploaded }) {
 
   return (
     <figure className={`detail-card${path ? ' detail-card--filled' : ''}`}>
-      {path ? <img src={memoryUrl(path)} alt={card.alt} loading="lazy" /> : <div className="detail-card__placeholder" aria-hidden="true"><span>{card.symbol}</span></div>}
+      {path ? <MemoryImage path={path} width={900} fallbackWidth={480} alt={card.alt} loading="lazy" /> : <div className="detail-card__placeholder" aria-hidden="true"><span>{card.symbol}</span></div>}
       {path && <figcaption>{card.label}</figcaption>}
       {!path && ready && !editing && <button className="detail-card__add" type="button" onClick={() => setEditing(true)}>Añadir {card.label.toLowerCase()}</button>}
       {!path && ready && editing && <form className="detail-card__form" onSubmit={submit}>
         <label htmlFor={`detail-file-${card.slot}`}>Elige la foto</label>
         <input id={`detail-file-${card.slot}`} type="file" accept="image/*" onChange={(event) => setFile(event.target.files?.[0] || null)} required />
-        <label htmlFor={`detail-code-${card.slot}`}>Código de administración</label>
-        <input id={`detail-code-${card.slot}`} type="password" value={code} onChange={(event) => setCode(event.target.value)} autoComplete="off" required />
         {stage && <p role="status">{stage}</p>}
         {error && <p className="detail-card__error" role="alert">{error}</p>}
-        <div className="detail-card__actions"><button type="submit" disabled={busy || !file || !code}>{busy ? 'Subiendo...' : 'Guardar foto'}</button><button type="button" onClick={() => setEditing(false)} disabled={busy}>Cancelar</button></div>
+        <div className="detail-card__actions"><button type="submit" disabled={busy || !file}>{busy ? 'Subiendo...' : 'Guardar foto'}</button><button type="button" onClick={() => setEditing(false)} disabled={busy}>Cancelar</button></div>
       </form>}
     </figure>
   );
@@ -66,7 +61,7 @@ function FestivalCover({ festival, details, onOpen }) {
   return (
     <button className="festival-card" type="button" onClick={onOpen} aria-label={`Abrir álbum ${festival.title} del ${festival.date}`}>
       <span className="festival-card__previews" aria-hidden="true">
-        {available.slice(0, 2).map((photo, index) => <span className={`festival-card__photo festival-card__photo--${index + 1}`} key={photo.slot}><img src={memoryUrl(details[photo.slot])} alt="" /></span>)}
+        {available.slice(0, 2).map((photo, index) => <span className={`festival-card__photo festival-card__photo--${index + 1}`} key={photo.slot}><MemoryImage path={details[photo.slot]} width={480} alt="" /></span>)}
         {!available.length && <span className="festival-card__empty">{festival.icon}</span>}
       </span>
       <span className="festival-card__date"><b>{festival.date}</b><small>{festival.year}</small></span>
@@ -90,7 +85,11 @@ export default function GardenSection({ today }) {
   async function load() {
     setLoading(true);
     setError('');
-    try { setDetails(await getDetailPhotos()); }
+    try {
+      const loaded = await getDetailPhotos();
+      setDetails(loaded);
+      prepareImagesOffline(Object.values(loaded).filter(Boolean).flatMap((path) => [memoryImageUrl(path, 480), memoryImageUrl(path, 900)]));
+    }
     catch (loadError) { setError(loadError.message); }
     finally { setLoading(false); }
   }

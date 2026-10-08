@@ -2,6 +2,11 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { localMemories } from '../../data/localMemories.js';
 import { getMemories } from '../../services/memories.js';
+import { memoryImageUrl } from '../../services/supabase.js';
+import { prepareImagesOffline } from '../../pwa/offline.js';
+import MemoryImage from '../Media/MemoryImage.jsx';
+
+const THUMB_WIDTH = 640;
 
 const MemoryManager = lazy(() => import('./MemoryManager.jsx'));
 
@@ -26,7 +31,11 @@ export default function MemoriesPreview() {
 
   useEffect(() => {
     let active = true;
-    getMemories().then((items) => { if (active) setMemories(items); }).catch(() => {});
+    getMemories().then((items) => {
+      if (!active) return;
+      setMemories(items);
+      prepareImagesOffline(items.filter((item) => item.image_path && item.mediaType === 'image').map((item) => memoryImageUrl(item.image_path, THUMB_WIDTH)));
+    }).catch(() => {});
     return () => { active = false; };
   }, []);
 
@@ -71,7 +80,7 @@ export default function MemoriesPreview() {
             {visibleMemories.map((memory, index) => (
               <motion.figure className="memory-card" key={memory.id} initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.55, delay: (index % 4) * 0.07 }}>
                 <button type="button" onClick={() => openMemory(memory)} aria-label={`Abrir ${album === 'video' ? 'video' : 'foto'} ${index + 1}: ${memory.alt}`}>
-                  {memory.mediaType === 'video' ? <video src={memory.imageUrl} muted preload="metadata" playsInline /> : <img src={memory.imageUrl} alt={memory.alt} loading={index < 4 ? 'eager' : 'lazy'} decoding="async" />}
+                  {memory.mediaType === 'video' ? <video src={`${memory.imageUrl}#t=0.1`} muted preload="metadata" playsInline /> : <MemoryImage path={memory.image_path} src={memory.imageUrl} width={THUMB_WIDTH} alt={memory.alt} loading={index < 4 ? 'eager' : 'lazy'} />}
                   <span className="memory-card__view" aria-hidden="true">{memory.mediaType === 'video' ? <svg viewBox="0 0 24 24" fill="currentColor"><path d="m8 5 12 7-12 7V5Z" /></svg> : <ExpandIcon />}</span>
                 </button>
                 <figcaption>{memory.caption || 'Un momento nuestro ♡'}</figcaption>
@@ -85,7 +94,7 @@ export default function MemoriesPreview() {
       <dialog className="memory-dialog" ref={dialogRef} onClose={() => setSelected(null)} onClick={(event) => { if (event.target === dialogRef.current) dialogRef.current.close(); }} aria-label="Recuerdo ampliado">
         {selected && <div className="memory-dialog__content">
           <button className="memory-dialog__close" type="button" onClick={() => dialogRef.current?.close()} aria-label="Cerrar recuerdo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" /></svg></button>
-          {selected.mediaType === 'video' ? <video src={selected.imageUrl} controls autoPlay playsInline /> : <img src={selected.imageUrl} alt={selected.alt} />}
+          {selected.mediaType === 'video' ? <video src={selected.imageUrl} controls autoPlay playsInline /> : <MemoryImage key={selected.id} path={selected.image_path} src={selected.imageUrl} width={1600} fallbackWidth={THUMB_WIDTH} alt={selected.alt} />}
           {selected.caption && <p>{selected.caption}</p>}
         </div>}
       </dialog>
