@@ -2,4 +2,3 @@
 export const MEMORY_CODE_KEY = 'fabian-grace-memory-code';
 export const STORY_REMEMBER_KEY = 'fabian-grace-remember-story';
 export const STORY_TOKEN_KEY = 'fabian-grace-story-token';
-export const INSTALL_DISMISSED_KEY = 'fabian-grace-install-dismissed';
