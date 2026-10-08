@@ -5,6 +5,7 @@ import StoryGate from './components/Intro/StoryGate.jsx';
 import SeasonalDecor from './components/Intro/SeasonalDecor.jsx';
 import TogetherCounter from './components/Intro/TogetherCounter.jsx';
 import BackgroundMusic from './components/Audio/BackgroundMusic.jsx';
+import InstallPrompt from './components/Install/InstallPrompt.jsx';
 import IntroSection from './sections/IntroSection.jsx';
 import GardenSection from './sections/GardenSection.jsx';
 import MemoriesSection from './sections/MemoriesSection.jsx';
@@ -89,6 +90,7 @@ export default function App() {
             </motion.main>
           )}
         </AnimatePresence>
+        <InstallPrompt visible={isOpen} />
       </div>
     </MotionConfig>
   );
