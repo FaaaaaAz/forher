@@ -3,6 +3,7 @@ import { AnimatePresence, motion, MotionConfig } from 'motion/react';
 import StarField from './components/Intro/StarField.jsx';
 import StoryGate from './components/Intro/StoryGate.jsx';
 import SeasonalDecor from './components/Intro/SeasonalDecor.jsx';
+import HalloweenDecor from './components/Intro/HalloweenDecor.jsx';
 import TogetherCounter from './components/Intro/TogetherCounter.jsx';
 import BackgroundMusic from './components/Audio/BackgroundMusic.jsx';
 import IntroSection from './sections/IntroSection.jsx';
@@ -51,6 +52,7 @@ export default function App() {
       <div className={`site-shell site-shell--${season.id}`}>
         <StarField />
         <SeasonalDecor season={season} />
+        {season.id === 'halloween' && <HalloweenDecor />}
         <AnimatePresence mode="wait">
           {isOpen ? (
             <motion.main

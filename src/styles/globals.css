@@ -864,3 +864,65 @@ input, textarea, select { font-size: 16px; }
   .story-gate { padding-top: calc(75px + env(safe-area-inset-top)); padding-bottom: calc(35px + env(safe-area-inset-bottom)); }
   .story-gate__back { top: calc(24px + env(safe-area-inset-top)); }
 }
+
+/* Halloween: telarañas, luna, fantasmas, murciélagos y neblina (solo en octubre, todo dibujado en SVG/CSS). */
+.site-shell--halloween {
+  --halloween-web: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0 0L100 0M0 0L95.1 30.9M0 0L80.9 58.8M0 0L58.8 80.9M0 0L30.9 95.1M0 0L0 100M17.9 0Q14.1 2.2 17 5.5Q12.7 6.5 14.4 10.5Q10.1 10.1 10.5 14.4Q6.5 12.7 5.5 17Q2.2 14.1 0 17.9M35.7 0Q28.2 4.5 34 11Q25.5 13 28.9 21Q20.2 20.2 21 28.9Q13 25.5 11 34Q4.5 28.2 0 35.7M53.6 0Q42.3 6.7 50.9 16.6Q38.2 19.5 43.3 31.5Q30.3 30.3 31.5 43.3Q19.5 38.2 16.6 50.9Q6.7 42.3 0 53.6M71.4 0Q56.4 8.9 67.9 22.1Q50.9 25.9 57.8 42Q40.4 40.4 42 57.8Q25.9 50.9 22.1 67.9Q8.9 56.4 0 71.4M89.3 0Q70.5 11.2 84.9 27.6Q63.6 32.4 72.2 52.5Q50.5 50.5 52.5 72.2Q32.4 63.6 27.6 84.9Q11.2 70.5 0 89.3' fill='none' stroke='%23fff3ea' stroke-width='.9' stroke-opacity='.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  --halloween-spider: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 120'%3E%3Cpath d='M20 0V88' stroke='%23fff3ea' stroke-opacity='.7' stroke-width='.8'/%3E%3Cg fill='none' stroke='%231d141d' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M14 100 4 92M14 103 2 102M14 106 4 113M16 108 9 118M26 100 36 92M26 103 38 102M26 106 36 113M24 108 31 118'/%3E%3C/g%3E%3Cellipse cx='20' cy='104' rx='7' ry='8' fill='%231d141d' stroke='%23fff3ea' stroke-opacity='.35' stroke-width='.6'/%3E%3Ccircle cx='20' cy='95' r='4.5' fill='%231d141d'/%3E%3Ccircle cx='18.4' cy='94.6' r='.9' fill='%23e7a064'/%3E%3Ccircle cx='21.6' cy='94.6' r='.9' fill='%23e7a064'/%3E%3C/svg%3E");
+}
+
+.halloween-decor { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.halloween-moon { position: absolute; top: 8%; right: 7%; width: 150px; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 38% 34%, #fff5df, #f1d4a2 46%, #d6a467 100%); box-shadow: 0 0 60px rgba(242, 201, 140, .32), 0 0 150px rgba(231, 160, 100, .16); opacity: .5; animation: halloween-moon-glow 9s ease-in-out infinite; }
+.halloween-moon span { position: absolute; border-radius: 50%; background: rgba(160, 108, 58, .22); }
+.halloween-moon span:nth-child(1) { top: 26%; left: 52%; width: 22%; height: 22%; }
+.halloween-moon span:nth-child(2) { top: 58%; left: 28%; width: 14%; height: 14%; }
+.halloween-moon span:nth-child(3) { top: 40%; left: 20%; width: 9%; height: 9%; }
+.halloween-web { position: absolute; top: 0; width: 170px; height: 170px; fill: none; stroke: #f6e6dc; stroke-width: .7; stroke-linecap: round; opacity: .22; }
+.halloween-web--left { left: 0; }
+.halloween-web--right { right: 0; transform: scaleX(-1); }
+.halloween-spider { position: absolute; top: -70px; left: 118px; display: flex; flex-direction: column; align-items: center; animation: halloween-spider-drop 9s ease-in-out infinite; }
+.halloween-spider__thread { width: 1px; height: 190px; background: linear-gradient(rgba(246, 230, 220, .1), rgba(246, 230, 220, .45)); }
+.halloween-spider__body { width: 30px; height: 26px; margin-top: -2px; opacity: .9; }
+.halloween-ghost { position: absolute; opacity: .16; animation: halloween-float 12s ease-in-out infinite; }
+.halloween-bat { position: absolute; left: 0; opacity: .5; animation: halloween-bat-fly 26s linear infinite; }
+.halloween-bat__body { display: block; fill: #0b080c; transform-origin: 50% 40%; animation: halloween-flap .28s ease-in-out infinite alternate; }
+.halloween-fog { position: absolute; left: 0; bottom: 0; width: 200%; height: 32vh; background: radial-gradient(ellipse 22% 60% at 18% 100%, rgba(214, 196, 222, .11), transparent 70%), radial-gradient(ellipse 18% 50% at 46% 100%, rgba(214, 196, 222, .08), transparent 70%), radial-gradient(ellipse 24% 65% at 72% 100%, rgba(214, 196, 222, .1), transparent 70%), radial-gradient(ellipse 20% 55% at 94% 100%, rgba(214, 196, 222, .08), transparent 70%); }
+.halloween-fog--back { animation: halloween-fog-drift 70s linear infinite alternate; }
+.halloween-fog--front { height: 22vh; opacity: .8; animation: halloween-fog-drift 46s linear infinite alternate-reverse; }
+
+/* Calabazas con cara de linterna */
+.site-shell--halloween .seasonal-motif--pumpkin::after { content: ''; position: absolute; inset: 6px 6px 5px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 13'%3E%3Cpath d='M2 5 4.5 1 7 5ZM10 5 12.5 1 15 5ZM2 8q6.5 6 13 0l-2 1.6-2-1.6-2 1.6-2-1.6-2 1.6Z' fill='%23ffd27a'/%3E%3C/svg%3E") center / contain no-repeat; }
+.site-shell--halloween .seasonal-motif--pumpkin { box-shadow: inset 7px 0 #bd7045, inset -7px 0 #e29a5e, 0 0 16px rgba(255, 170, 80, .3); }
+
+/* Telarañas en los marcos de las fotos y tarjetas */
+.site-shell--halloween .detail-card,
+.site-shell--halloween .plan-card__image { position: relative; }
+.site-shell--halloween .memory-card > button:first-child::after,
+.site-shell--halloween .detail-card::after,
+.site-shell--halloween .plan-card__image::after,
+.site-shell--halloween .festival-card::after { content: ''; position: absolute; top: 0; right: 0; z-index: 2; width: clamp(56px, 34%, 104px); aspect-ratio: 1; background: var(--halloween-web) top left / contain no-repeat; transform: scaleX(-1); pointer-events: none; opacity: .75; }
+.site-shell--halloween .memory-card:nth-child(even) > button:first-child::after { right: auto; left: 0; transform: none; }
+.site-shell--halloween .detail-card::after { top: -1px; right: -1px; border-top-right-radius: 17px; }
+/* Una arañita colgando de la telaraña en algunas fotos, en la esquina para no tapar caras */
+.site-shell--halloween .memory-card:nth-child(3n + 1) > button:first-child::before { content: ''; position: absolute; top: 0; right: 9%; z-index: 2; width: 15px; height: 45px; background: var(--halloween-spider) top center / contain no-repeat; transform-origin: top center; pointer-events: none; animation: halloween-spider-swing 5s ease-in-out infinite; }
+.site-shell--halloween .memory-card:nth-child(6n + 4) > button:first-child::before { right: auto; left: 9%; animation-delay: -2.5s; }
+
+@keyframes halloween-float { 0%, 100% { transform: translate(0, 0) rotate(-4deg); opacity: .1; } 50% { transform: translate(16px, -26px) rotate(4deg); opacity: .22; } }
+@keyframes halloween-bat-fly { 0% { transform: translate(-14vw, 0); } 25% { transform: translate(22vw, -34px); } 50% { transform: translate(52vw, 12px); } 75% { transform: translate(82vw, -26px); } 100% { transform: translate(114vw, 6px); } }
+@keyframes halloween-flap { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+@keyframes halloween-spider-drop { 0%, 100% { transform: translateY(0); } 45%, 60% { transform: translateY(70px); } }
+@keyframes halloween-spider-swing { 0%, 100% { transform: rotate(5deg); } 50% { transform: rotate(-5deg) translateY(6px); } }
+@keyframes halloween-moon-glow { 0%, 100% { opacity: .45; } 50% { opacity: .58; } }
+@keyframes halloween-fog-drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+@media (max-width: 760px) {
+  .halloween-moon { top: 11%; right: -18px; width: 96px; }
+  .halloween-web { width: 104px; height: 104px; }
+  .halloween-spider { left: 70px; }
+  .halloween-spider__thread { height: 150px; }
+  .halloween-ghost--4, .halloween-bat--3 { display: none; }
+  .halloween-ghost svg { opacity: .65; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .halloween-decor *, .site-shell--halloween .memory-card > button:first-child::before { animation: none !important; }
+}
