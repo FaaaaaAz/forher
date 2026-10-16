@@ -6,7 +6,7 @@ import { memoryImageUrl } from '../../services/supabase.js';
 import { prepareImagesOffline } from '../../pwa/offline.js';
 import MemoryImage from '../Media/MemoryImage.jsx';
 
-const THUMB_WIDTH = 640;
+const THUMB_WIDTH = 800;
 
 const MemoryManager = lazy(() => import('./MemoryManager.jsx'));
 
