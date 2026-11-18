@@ -1,4 +1,6 @@
 import { useRef } from 'react';
+import StylistCameo from '../Cosecha/StylistCameo.jsx';
+import MovieTickets from '../Cosecha/MovieTickets.jsx';
 
 function CloseButton({ onClick }) {
   return <button type="button" className="letter-paper__close" onClick={onClick} aria-label="Cerrar carta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" /></svg></button>;
@@ -19,28 +21,52 @@ function LetterDialog({ dialogRef, titleId, date, title, children }) {
   );
 }
 
-export default function LetterPreview() {
+export default function LetterPreview({ movie = false }) {
   const currentRef = useRef(null);
   const archiveRef = useRef(null);
 
-  return (
+  const mailboxParts = (
     <>
-      <div className="mailbox-scene">
-        <span className="mailbox-scene__spark mailbox-scene__spark--one" aria-hidden="true">✦</span>
-        <span className="mailbox-scene__spark mailbox-scene__spark--two" aria-hidden="true">♡</span>
+      <span className="love-mailbox__box" aria-hidden="true"><span className="love-mailbox__door"><b>F &amp; G</b><i>♡</i></span></span>
+      <span className="love-mailbox__flag" aria-hidden="true"><i /><b>♡</b></span>
+      <span className="love-mailbox__post" aria-hidden="true" />
+      <span className="love-mailbox__ground" aria-hidden="true" />
+    </>
+  );
+
+  // Los días de la película el buzón guarda las dos entradas del cine; al tocarlo se abren en grande.
+  const mailbox = (
+    <div className="mailbox-scene">
+      <span className="mailbox-scene__spark mailbox-scene__spark--one" aria-hidden="true">✦</span>
+      <span className="mailbox-scene__spark mailbox-scene__spark--two" aria-hidden="true">♡</span>
+      {movie ? (
+        <MovieTickets mailboxParts={mailboxParts} />
+      ) : (
         <button className="love-mailbox" type="button" onClick={() => currentRef.current?.showModal()} aria-label="Abrir la carta nueva">
           <span className="love-mailbox__letter" aria-hidden="true"><small>PARA GRACE</small><b>♡</b></span>
-          <span className="love-mailbox__box" aria-hidden="true"><span className="love-mailbox__door"><b>F &amp; G</b><i>♡</i></span></span>
-          <span className="love-mailbox__flag" aria-hidden="true"><i /><b>♡</b></span>
-          <span className="love-mailbox__post" aria-hidden="true" />
-          <span className="love-mailbox__ground" aria-hidden="true" />
+          {mailboxParts}
           <span className="love-mailbox__hint">Tienes una carta nueva</span>
         </button>
-      </div>
+      )}
+    </div>
+  );
+
+  return (
+    <>
+      {movie ? <div className="mailbox-stage"><StylistCameo />{mailbox}</div> : mailbox}
 
       <div className="letter-archive">
-        <div className="letter-archive__heading"><span>CARTAS QUE GUARDAMOS</span><small>01 carta</small></div>
+        <div className="letter-archive__heading"><span>CARTAS QUE GUARDAMOS</span><small>{movie ? '02 cartas' : '01 carta'}</small></div>
         <div className="letter-shelf">
+          {movie && (
+            <button className="letter-keepsake" type="button" onClick={() => currentRef.current?.showModal()} aria-label="Abrir carta de los dos años y cinco meses">
+              <span className="letter-keepsake__stamp" aria-hidden="true">♡</span>
+              <span className="letter-keepsake__date">28 · 09</span>
+              <strong>2 años y 5 meses</strong>
+              <small>Una carta para volver a leer</small>
+              <span className="letter-keepsake__seal" aria-hidden="true">F &amp; G</span>
+            </button>
+          )}
           <button className="letter-keepsake" type="button" onClick={() => archiveRef.current?.showModal()} aria-label="Abrir carta del 21 de septiembre">
             <span className="letter-keepsake__stamp" aria-hidden="true">♡</span>
             <span className="letter-keepsake__date">21 · 09</span>
