@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import noHeyBee from '../../assets/audio/noheybeeAudioor.mp3';
 import upRoses from '../../assets/audio/uprosesAudiohs.mp3';
+import harvest from '../../assets/audio/amanecerCosechaAudio.mp3';
 import { prepareMusicOffline } from '../../pwa/offline.js';
 
+// La primera es la canción principal: suena al entrar.
 const tracks = [
+  { src: harvest, name: 'Amanecer en la cosecha' },
   { src: upRoses, name: 'Coming Up Roses' },
   { src: noHeyBee, name: 'Honeybee' },
 ];
