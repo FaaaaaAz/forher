@@ -28,3 +28,11 @@ test('usa el tema de amor y cambia automáticamente a Halloween en octubre', () 
   assert.equal(getSeason({ month: 10, day: 1 }).greeting, 'Feliz Halloween');
   assert.equal(getSeason({ year: 2026, month: 11, day: 1 }).id, 'love');
 });
+
+test('el estilo de la película dura solo dos días y se puede previsualizar', () => {
+  assert.equal(getSeason({ year: 2026, month: 11, day: 17 }).id, 'love');
+  assert.equal(getSeason({ year: 2026, month: 11, day: 18 }).id, 'cosecha');
+  assert.equal(getSeason({ year: 2026, month: 11, day: 19 }).id, 'cosecha');
+  assert.equal(getSeason({ year: 2026, month: 11, day: 20 }).id, 'love');
+  assert.equal(getSeason({ year: 2026, month: 12, day: 2 }, { preview: 'cosecha' }).id, 'cosecha');
+});
