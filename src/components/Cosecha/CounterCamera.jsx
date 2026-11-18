@@ -74,7 +74,7 @@ function CounterCamera() {
         <span className="camera-vf__af">AF</span>
       </div>
       <figure className="mentor-cameo">
-        <img src={mentor} alt="El mentor, mirando de reojo la cuenta de los días" loading="lazy" decoding="async" />
+        <img src={mentor} width="424" height="640" alt="El mentor, mirando de reojo la cuenta de los días" loading="lazy" decoding="async" />
         <span className="mentor-cameo__focus" aria-hidden="true" />
       </figure>
     </>

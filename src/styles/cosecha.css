@@ -76,7 +76,7 @@ html[data-world='end'] .site-shell--cosecha .seasonal-decor { opacity: 0; transi
   top: 10%;
   left: -4%;
   width: min(56vw, 560px);
-  aspect-ratio: 1;
+  height: min(56vw, 560px);
   background: rgba(200, 190, 170, 0.055);
   -webkit-mask: var(--bird) center / contain no-repeat;
   mask: var(--bird) center / contain no-repeat;
@@ -374,7 +374,7 @@ html[data-world='end'] .site-shell--cosecha .music-player { opacity: 0.35; trans
 @media (max-width: 760px) {
   .site-shell--cosecha .welcome__title { font-size: clamp(64px, 19vw, 104px); }
   .site-shell--cosecha .bloom-intro h1 { font-size: clamp(56px, 15vw, 88px); }
-  .movie-emblem { width: min(300px, 100%); height: auto; aspect-ratio: 1; }
+  .movie-emblem { width: 300px; height: 300px; }
   .site-shell--cosecha .bloom-intro__art { min-height: 360px; align-content: start; padding-top: 10px; }
   .cosecha-gift { padding: 100px 20px 110px; }
   .cosecha-gift__button { padding: 16px 24px; font-size: 19px; }
@@ -388,7 +388,7 @@ html[data-world='end'] .site-shell--cosecha .music-player { opacity: 0.35; trans
   .site-shell--cosecha .memory-card > button:first-child::after { top: 7px; left: 7px; padding: 2px 5px; font-size: 8px; }
 }
 @media (max-width: 400px) {
-  .movie-emblem { width: min(260px, 100%); }
+  .movie-emblem { width: 260px; height: 260px; }
   .cosecha-viewers__pill span:last-child { display: none; }
 }
 
@@ -405,8 +405,8 @@ html[data-world='end'] .site-shell--cosecha .music-player { opacity: 0.35; trans
   z-index: -1;
   top: 50%;
   left: 50%;
+  width: 100vh;
   height: 100%;
-  aspect-ratio: 1;
   transform: translate(-50%, -50%);
   -webkit-mask: radial-gradient(closest-side, #000 58%, transparent 100%);
   mask: radial-gradient(closest-side, #000 58%, transparent 100%);
@@ -417,7 +417,7 @@ html[data-world='end'] .site-shell--cosecha .music-player { opacity: 0.35; trans
 .site-shell--cosecha .bloom-intro :is(h1, .bloom-intro__description, .couple-signature, .eyebrow, .bloom-intro__art-caption, .movie-emblem__initials) { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), 0 4px 26px rgba(0, 0, 0, 0.85); }
 @keyframes cosecha-emerge { from { opacity: 0; filter: blur(6px); } to { opacity: 1; filter: none; } }
 @media (max-width: 760px) {
-  .couple-backdrop { top: calc(60px + env(safe-area-inset-top)); width: 135vw; height: auto; transform: translateX(-50%); }
+  .couple-backdrop { top: calc(60px + env(safe-area-inset-top)); width: 135vw; height: 135vw; transform: translateX(-50%); }
   .site-shell--cosecha .bloom-intro__description { color: #f1ebe1; text-shadow: 0 1px 2px #000, 0 0 10px rgba(0, 0, 0, 0.95), 0 2px 22px rgba(0, 0, 0, 0.9); }
 }
 
@@ -442,14 +442,15 @@ html[data-world='end'] .site-shell--cosecha .music-player { opacity: 0.35; trans
 .camera-vf__bar--top { top: 0; }
 .camera-vf__bar--bottom { bottom: 0; }
 
-.mentor-cameo { position: absolute; z-index: 0; right: max(2%, calc(50% - 640px)); bottom: 0; height: min(92%, 580px); aspect-ratio: 424 / 640; margin: 0; }
-.mentor-cameo img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: bottom; -webkit-mask: linear-gradient(#000 78%, transparent); mask: linear-gradient(#000 78%, transparent); }
+.mentor-cameo { position: absolute; z-index: 0; right: max(2%, calc(50% - 640px)); bottom: 0; width: -webkit-max-content; width: max-content; height: min(92%, 580px); margin: 0; }
+.mentor-cameo img { display: block; width: auto; height: 100%; -webkit-mask: linear-gradient(#000 78%, transparent); mask: linear-gradient(#000 78%, transparent); }
 .mentor-cameo__focus {
   position: absolute;
   left: 66%;
   top: 30%;
   width: 40%;
-  aspect-ratio: 1;
+  height: 0;
+  padding-bottom: 40%;
   transform: translate(-50%, -50%) scale(1.6);
   opacity: 0;
   color: #fff;
@@ -518,8 +519,8 @@ html[data-world='end'] .site-shell--cosecha .music-player { opacity: 0.35; trans
 /* ---------- Buzón con dos entradas de cine y el estilista al lado ---------- */
 .mailbox-stage { display: flex; align-items: flex-end; justify-content: center; gap: clamp(0px, 3vw, 40px); width: min(100%, 900px); margin: 42px auto 10px; }
 .mailbox-stage .mailbox-scene { position: relative; z-index: 1; flex: none; margin: 0; }
-.stylist-cameo { position: relative; z-index: 0; flex: none; width: clamp(230px, 28vw, 340px); aspect-ratio: 863 / 1024; margin: 0 0 -6px; }
-.stylist-cameo img { display: block; width: 100%; height: 100%; object-fit: contain; -webkit-mask: radial-gradient(ellipse 52% 56% at 52% 44%, #000 58%, transparent 100%); mask: radial-gradient(ellipse 52% 56% at 52% 44%, #000 58%, transparent 100%); }
+.stylist-cameo { position: relative; z-index: 0; flex: none; width: clamp(230px, 28vw, 340px); margin: 0 0 -6px; }
+.stylist-cameo img { display: block; width: 100%; height: auto; -webkit-mask: radial-gradient(ellipse 52% 56% at 52% 44%, #000 58%, transparent 100%); mask: radial-gradient(ellipse 52% 56% at 52% 44%, #000 58%, transparent 100%); }
 
 .love-mailbox--tickets { height: 500px; }
 /* Con las entradas, el buzón baja para dejarlas asomar enteras */

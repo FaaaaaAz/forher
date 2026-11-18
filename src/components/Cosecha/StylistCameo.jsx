@@ -4,7 +4,7 @@ import stylist from '../../assets/cosecha/estilista.webp';
 export default function StylistCameo() {
   return (
     <figure className="stylist-cameo">
-      <img src={stylist} alt="El estilista, mirando hacia el buzón" loading="lazy" decoding="async" />
+      <img src={stylist} width="863" height="1024" alt="El estilista, mirando hacia el buzón" loading="lazy" decoding="async" />
     </figure>
   );
 }
