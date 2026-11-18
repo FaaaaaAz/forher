@@ -4,6 +4,10 @@ import StarField from './components/Intro/StarField.jsx';
 import StoryGate from './components/Intro/StoryGate.jsx';
 import SeasonalDecor from './components/Intro/SeasonalDecor.jsx';
 import HalloweenDecor from './components/Intro/HalloweenDecor.jsx';
+import CosechaLayer from './components/Cosecha/CosechaLayer.jsx';
+import GiftSection from './components/Cosecha/GiftSection.jsx';
+import EpilogueSection from './components/Cosecha/EpilogueSection.jsx';
+import CounterCamera from './components/Cosecha/CounterCamera.jsx';
 import TogetherCounter from './components/Intro/TogetherCounter.jsx';
 import BackgroundMusic from './components/Audio/BackgroundMusic.jsx';
 import IntroSection from './sections/IntroSection.jsx';
@@ -15,12 +19,17 @@ import { clearStorySession, hasRememberedSession, saveStorySession, SESSION_EXPI
 import { getBoliviaDate } from './utils/dates.js';
 import { getSeason } from './utils/season.js';
 
+// ?tema=cosecha permite ver el estilo de la película antes de sus dos días.
+const readPreview = () => new URLSearchParams(window.location.search).get('tema');
+
 export default function App() {
   const [isOpen, setIsOpen] = useState(hasRememberedSession);
   const [showGate, setShowGate] = useState(false);
   const [now, setNow] = useState(() => new Date());
+  const [preview] = useState(readPreview);
   const today = getBoliviaDate(now);
-  const season = getSeason(today);
+  const season = getSeason(today, { preview });
+  const movie = season.id === 'cosecha';
 
   useEffect(() => {
     const interval = window.setInterval(() => setNow(new Date()), 1000);
@@ -53,6 +62,7 @@ export default function App() {
         <StarField />
         <SeasonalDecor season={season} />
         {season.id === 'halloween' && <HalloweenDecor />}
+        {movie && <CosechaLayer inStory={isOpen} />}
         <AnimatePresence mode="wait">
           {isOpen ? (
             <motion.main
@@ -65,13 +75,15 @@ export default function App() {
             >
               <BackgroundMusic />
               <IntroSection isOpen season={season} onLogout={logoutStory} />
-              <TogetherCounter today={today} now={now} />
+              <TogetherCounter today={today} now={now}>{movie && <CounterCamera />}</TogetherCounter>
+              {movie && <GiftSection />}
               <div className="chapters" aria-label="Nuestra historia">
               <GardenSection today={today} />
                 <MemoriesSection />
-                <LetterSection />
+                <LetterSection movie={movie} />
                 <PlansSection />
               </div>
+              {movie && <EpilogueSection />}
             </motion.main>
           ) : showGate ? (
             <motion.main key="gate" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 1.02 }} transition={{ duration: 0.45 }}>

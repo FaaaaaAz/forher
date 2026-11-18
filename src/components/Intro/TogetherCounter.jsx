@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { getBoliviaClock, getTimeTogether } from '../../utils/dates.js';
 
-export default function TogetherCounter({ today, now }) {
+export default function TogetherCounter({ today, now, children }) {
   const time = getTimeTogether(today);
   const clock = getBoliviaClock(now);
   const units = [
@@ -28,6 +28,7 @@ export default function TogetherCounter({ today, now }) {
         </div>
         <p className="together__footnote">{new Intl.NumberFormat('es-BO').format(time.totalDays)} días compartiendo esta historia, y contando.</p>
       </motion.div>
+      {children}
     </section>
   );
 }

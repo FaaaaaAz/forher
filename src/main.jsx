@@ -5,6 +5,7 @@ import { registerServiceWorker } from './pwa/registerServiceWorker.js';
 import './styles/variables.css';
 import './styles/animations.css';
 import './styles/globals.css';
+import './styles/cosecha.css';
 
 registerServiceWorker();
 
